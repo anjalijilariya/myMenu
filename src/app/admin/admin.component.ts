@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
+      category: ['', Validators.required],
       price: ['', Validators.required],
       desc: ['', Validators.required]
     });
