@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  listData: any[] = [];
+  cat = 'food';
+
+  constructor() {}
 
   ngOnInit(): void {
+    // Load stored data from sessionStorage if available
+    const storedData = sessionStorage.getItem('listData');
+    if (storedData) {
+      this.listData = JSON.parse(storedData);
+    }
+
+    const category = sessionStorage.getItem('cat');
+    if(category){
+      this.cat = JSON.parse(category);
+    }
   }
 
 }

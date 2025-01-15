@@ -1,28 +1,47 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+.container{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.head{
+  width: 100%;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 200%;
+  font-weight: bold;
+  color: rgb(25 118 210);
+  margin-bottom: 60px;
+}
 .box{
-    width: 50%;
-    border: 1px solid rgb(145, 138, 138);
+    width: 47%;
+    border: 1px solid rgb(25 118 210);
     border-radius: 25px;
-    padding: 0px 20px 20px 20px;
-    margin-left: 400px;
+    margin: 1rem;
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    font-style: oblique;
+    font-weight: bold;
+    :hover{
+      background-color: rgb(25 118 210 /70%);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
 }
 
-.form-group{
-    //border: 2px solid red;
-    margin: 10px;
-    font-weight: 500;
-    font-size: 1.1rem;
+.card{
+  padding: 20px 20px 20px 20px;
+  border-radius: 25px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
 }
-
-input::placeholder {
-    font-weight: lighter; 
-    font-size: 0.9rem;    
-  }
-
-  .btn{
-    margin: 10px;
-    border-radius: 10px;
-    margin-right: 1px;
-    width: 400px;
-  }

@@ -1,22 +1,25 @@
+<form [formGroup]="userForm">
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8 mt-4 mb-4">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Price</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of listData">
-            <td><span>{{item.name}}</span></td>
-            <td><span>{{item.price}}</span></td>
-            <td><span>{{item.desc}}</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="head" id="head">
+    What would you like to try today!!  &nbsp; &nbsp;  :)
   </div>
+    <a routerLink="/menu" class="food box" id="food" formControlName="idxf" (click)="Change($event)">
+      <div class="card">Food</div> 
+    </a>
+    <a routerLink="/menu" class="bev box" id="bevarages" formControlName="idxb" (click)="Change($event)">
+      <div class="card">Bevarages</div>
+    </a>
+    <a routerLink="/menu" class="des box" id="dessert" formControlName="idxd" (click)="Change($event)">
+      <div class="card">Dessert</div>
+    </a>
+    <a href="https://mdbootstrap.com/" class="insta box">
+      <div class="card">Instagram</div>
+    </a>
+    <a href="https://mdbootstrap.com/" class="fb box">
+      <div class="card">Facebook</div>
+    </a>
+    <a href="https://mdbootstrap.com/" class="ln box">
+      <div class="card">Linkedin</div>
+    </a>
 </div>
+</form>

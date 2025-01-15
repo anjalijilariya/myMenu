@@ -1,0 +1,28 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.box{
+    width: 50%;
+    border: 1px solid rgb(145, 138, 138);
+    border-radius: 25px;
+    padding: 0px 20px 20px 20px;
+    margin-left: 400px;
+}
+
+.form-group{
+    //border: 2px solid red;
+    margin: 10px;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+input::placeholder {
+    font-weight: lighter; 
+    font-size: 0.9rem;    
+  }
+
+  .btn{
+    margin: 10px;
+    border-radius: 10px;
+    margin-right: 1px;
+    width: 400px;
+  }

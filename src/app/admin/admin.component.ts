@@ -10,6 +10,7 @@ export class AdminComponent implements OnInit {
 
   userForm: FormGroup;
   listData: any[] = [];
+  catlist = ['food', 'bevarages', 'dessert'];
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({

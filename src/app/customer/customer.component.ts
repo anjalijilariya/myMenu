@@ -9,15 +9,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CustomerComponent implements OnInit{
 
-  listData: any[] = [];
+  userForm: FormGroup;
+  cat: any;
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {
+    this.userForm = this.fb.group({
+      idxf: ['', Validators.required],
+      idxb: ['', Validators.required],
+      idxd: ['', Validators.required]
+    });
+  }
 
-  ngOnInit(): void {
-    // Load stored data from sessionStorage if available
-    const storedData = sessionStorage.getItem('listData');
-    if (storedData) {
-      this.listData = JSON.parse(storedData);
-    }
+  ngOnInit(): void { }
+
+  Change(event: Event): void
+  {
+    var vari = event.target as HTMLElement;
+    this.cat = vari.innerHTML.toLowerCase();
+
+    // // Store the updated list in sessionStorage
+    sessionStorage.setItem('cat', JSON.stringify(this.cat));
+    
+
+    //console.log(vari.innerHTML.toLowerCase());
   }
 }
