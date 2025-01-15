@@ -1,4 +1,4 @@
-  :host {
+:host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 14px;
     color: #333;
@@ -217,10 +217,10 @@
     line-height: 20px;
   }
 
-  // footer a {
-  //   display: flex;
-  //   align-items: center;
-  // }
+  footer a {
+    display: flex;
+    align-items: center;
+  }
 
   .github-star-badge {
     color: #24292e;
@@ -289,7 +289,7 @@
 
 
 .login{
-    margin-top: 130px;
+    margin-top: 4rem;
     //padding: 10px;
     background-color: #f9f9f9;
     border: 4px solid #7fb3ec;
@@ -325,20 +325,6 @@
 }
 
 .foot{
-  position: absolute;
-  bottom: 0;
-  width: 80%;
-  background-color: #1976d2;
-  display: flex;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  //line-height: 60px;
-  align-items: center;
-  justify-content: space-around;
-  padding-left: 145px;
-  padding-right: 145px;
-}
-
-.sm{
-  color: white;
+    padding-left: 95px;
+    font-size: small;
 }
