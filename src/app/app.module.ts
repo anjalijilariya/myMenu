@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from './menu/menu.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'menu', component: MenuComponent },
   { path: 'customer', component: CustomerComponent },  
   { path: 'admin', component: AdminComponent },
+  { path: 'error', component: ErrorPageComponent },
   { path: '**', component: LoginComponent },
 ];
 @NgModule({
@@ -24,7 +26,8 @@ const routes: Routes = [
     AdminComponent,
     CustomerComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    ErrorPageComponent
   ],
   imports: [
     FormsModule,

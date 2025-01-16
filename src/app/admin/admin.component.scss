@@ -29,7 +29,15 @@ input::placeholder {
   }
 
   .rmv{
-    width: 19%;
+    width: 8%;
+    :hover{
+      cursor: pointer;
+    }
   }
 
-  
+  .trash{
+    border-radius: 50%;
+    height: 55px;
+    width: 62px;
+    //border-color: white;
+  }

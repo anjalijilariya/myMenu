@@ -1,25 +1,23 @@
-<form [formGroup]="userForm">
 <div class="container">
   <div class="head" id="head">
     What would you like to try today!!  &nbsp; &nbsp;  :)
   </div>
-    <a routerLink="/menu" class="food box" id="food" formControlName="idxf" (click)="Change($event)">
-      <div class="card">Food</div> 
-    </a>
-    <a routerLink="/menu" class="bev box" id="bevarages" formControlName="idxb" (click)="Change($event)">
-      <div class="card">Bevarages</div>
-    </a>
-    <a routerLink="/menu" class="des box" id="dessert" formControlName="idxd" (click)="Change($event)">
-      <div class="card">Dessert</div>
-    </a>
-    <a href="https://mdbootstrap.com/" class="insta box">
-      <div class="card">Instagram</div>
-    </a>
-    <a href="https://mdbootstrap.com/" class="fb box">
-      <div class="card">Facebook</div>
-    </a>
-    <a href="https://mdbootstrap.com/" class="ln box">
-      <div class="card">Linkedin</div>
-    </a>
+  <a class="food box" id="food" (click)="Change($event)">
+    <div class="card">Food</div> 
+  </a>
+  <a class="bev box" id="bevarages" (click)="Change($event)">
+    <div class="card">Bevarages</div>
+  </a>
+  <a class="des box" id="dessert" (click)="Change($event)">
+    <div class="card">Dessert</div>
+  </a>
+  <a href="https://mdbootstrap.com/" class="insta box">
+    <div class="card">Instagram</div>
+  </a>
+  <a href="https://mdbootstrap.com/" class="fb box">
+    <div class="card">Facebook</div>
+  </a>
+  <a href="https://mdbootstrap.com/" class="ln box">
+    <div class="card">Linkedin</div>
+  </a>
 </div>
-</form>

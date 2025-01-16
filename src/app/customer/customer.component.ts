@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router'; // Import the Router
 
 @Component({
   selector: 'app-customer',
@@ -9,28 +8,38 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CustomerComponent implements OnInit{
 
-  userForm: FormGroup;
-  cat: any;
+  cat: any = 'food';
 
-  constructor(private fb: FormBuilder) {
-    this.userForm = this.fb.group({
-      idxf: ['', Validators.required],
-      idxb: ['', Validators.required],
-      idxd: ['', Validators.required]
-    });
-  }
+  constructor(private router: Router) {} // Inject Router into constructor
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
-  Change(event: Event): void
-  {
+  Change(event: Event): void {
     var vari = event.target as HTMLElement;
-    this.cat = vari.innerHTML.toLowerCase();
+    this.cat = vari.innerHTML.toLowerCase(); // Get the selected category
+    console.log(this.cat);
+    // Get the stored listData from sessionStorage
+    const storedData = sessionStorage.getItem('listData');
+    //console.log(storedData.indexOf('chocolate'));
 
-    // // Store the updated list in sessionStorage
-    sessionStorage.setItem('cat', JSON.stringify(this.cat));
+    if (storedData) {
+      const parsedData = JSON.parse(storedData); // Parse the stored data into an array of objects
+      
+      // Filter and count the elements with category equal to this.cat
+      const count = parsedData.filter(item => item.category.toLowerCase() === this.cat).length;
+
+      console.log('Count of items with category', this.cat, ':', count);
+      console.log(storedData);
+
+      // If count is greater than 0, navigate to menu page, else navigate to error page
+      if (count > 0) {
+        this.router.navigate(['/menu'], { queryParams: { category: this.cat } });
+      } else {
+        this.router.navigate(['/error'], { queryParams: { category: this.cat } });
+      }
+    }
     
-
-    //console.log(vari.innerHTML.toLowerCase());
+    // Store the selected category in sessionStorage
+    sessionStorage.setItem('cat', JSON.stringify(this.cat));
   }
 }

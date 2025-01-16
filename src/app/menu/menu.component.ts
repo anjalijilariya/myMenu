@@ -9,11 +9,11 @@ export class MenuComponent implements OnInit {
 
   listData: any[] = [];
   cat = 'food';
+  heading : string;
 
   constructor() {}
 
   ngOnInit(): void {
-    // Load stored data from sessionStorage if available
     const storedData = sessionStorage.getItem('listData');
     if (storedData) {
       this.listData = JSON.parse(storedData);
@@ -23,6 +23,8 @@ export class MenuComponent implements OnInit {
     if(category){
       this.cat = JSON.parse(category);
     }
+
+    this.heading = this.cat.toUpperCase();
   }
 
 }

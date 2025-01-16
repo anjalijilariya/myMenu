@@ -4,7 +4,7 @@
       <div class="form-row">
         <div class="col-md-12">
           <div class="form-group">
-            <label>Item Name</label>
+            <label>Item Name<span style="color: red;">*</span></label>
           </div>
           <div class="form-row">
             <div class="col">
@@ -19,20 +19,21 @@
         </div>
         <div class="col-md-12">
           <div class="form-group">
-            <label>Category</label>
+            <label>Category<span style="color: red;">*</span></label>
           </div>
           <div class="form-row">
             <div class="col">
-              <select name="category"formControlName="category" class="form-control custom-select">
-                <option selected>category</option>
-                <option *ngFor="let cat of catlist">{{ cat }}</option>
+              <select name="category" formControlName="category" class="form-control custom-select" >
+                <!-- <option value="" disabled selected>Category</option> Placeholder option -->
+                <option *ngFor="let cat of catlist" [value]="cat">{{ cat }}</option>
               </select>
             </div>
           </div>
+          
         </div>
         <div class="col-md-12">
           <div class="form-group">
-            <label>Description</label>
+            <label>Description<span style="color: red;">*</span></label>
           </div>
           <div class="form-row">
             <div class="col">
@@ -42,7 +43,7 @@
         </div>
         <div class="col-md-12">
           <div class="form-group">
-            <label>Price</label>
+            <label>Price<span style="color: red;">*</span></label>
           </div>
           <div class="form-row">
             <div class="col">
@@ -96,13 +97,7 @@
                 <span>{{ item.price }}</span>
               </td>
               <td class="rmv">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="removeItem(item)"
-                >
-                  Remove
-                </button>
+                  <img class="trash"  (click)="removeItem(item)" height="50" src="https://static.vecteezy.com/system/resources/previews/021/695/680/non_2x/trash-bin-logo-icon-template-free-vector.jpg" alt="">
               </td>
             </tr>
           </tbody>

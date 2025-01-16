@@ -11,7 +11,7 @@ export class AdminComponent implements OnInit {
   userForm: FormGroup;
   listData: any[] = [];
   catlist = ['food', 'bevarages', 'dessert'];
-
+  
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
@@ -28,17 +28,23 @@ export class AdminComponent implements OnInit {
       this.listData = JSON.parse(storedData);
     }
   }
-
   public addItem(): void {
-    // Push new item to the list
-    this.listData.push(this.userForm.value);
+    // Check if the form is valid
+    if (this.userForm.valid) {
+      // Push new item to the list
+      this.listData.push(this.userForm.value);
 
-    // Store the updated list in sessionStorage
-    sessionStorage.setItem('listData', JSON.stringify(this.listData));
-
-    // Reset the form
-    this.userForm.reset();
+      // Store the updated list in sessionStorage
+      sessionStorage.setItem('listData', JSON.stringify(this.listData));
+      //console.log(this.listData);
+      // Reset the form
+      this.userForm.reset();
+    } else {
+      // Alert the user if any field is empty
+      alert('All fields are necessary to be filled!');
+    }
   }
+  
 
   reset(): void {
     this.userForm.reset();
@@ -48,10 +54,11 @@ export class AdminComponent implements OnInit {
     this.listData.forEach((value, index) => {
       if (value === element) {
         this.listData.splice(index, 1);
-        // Update the stored data in sessionStorage after removing the item
+      
+      // Update the stored data in sessionStorage after removing the item
         sessionStorage.setItem('listData', JSON.stringify(this.listData));
+        //console.log(this.itemsize);
       }
     });
   }
-
 }
