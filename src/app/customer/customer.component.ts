@@ -35,10 +35,12 @@ export class CustomerComponent implements OnInit{
       if (count > 0) {
         this.router.navigate(['/menu'], { queryParams: { category: this.cat } });
       } else {
-        this.router.navigate(['/error'], { queryParams: { category: this.cat } });
+        this.router.navigate(['/error']);
       }
     }
-    
+    else {
+      this.router.navigate(['/error']);
+    }
     // Store the selected category in sessionStorage
     sessionStorage.setItem('cat', JSON.stringify(this.cat));
   }
