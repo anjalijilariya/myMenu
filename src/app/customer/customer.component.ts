@@ -33,7 +33,7 @@ export class CustomerComponent implements OnInit{
 
       // If count is greater than 0, navigate to menu page, else navigate to error page
       if (count > 0) {
-        this.router.navigate(['/menu'], { queryParams: { category: this.cat } });
+        this.router.navigate(['/customer/menu'], { queryParams: { category: this.cat } });
       } else {
         this.router.navigate(['/error']);
       }

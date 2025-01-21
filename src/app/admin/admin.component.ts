@@ -7,11 +7,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
   userForm: FormGroup;
   listData: any[] = [];
-  catlist = ['food', 'bevarages', 'dessert'];
-  
+  catlist = ['beverages', 'dessert', 'food'];
+  isEditMode: boolean = false; 
+  editIndex: number = -1; 
+
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
@@ -22,43 +23,62 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Load stored data from sessionStorage if available
     const storedData = sessionStorage.getItem('listData');
     if (storedData) {
       this.listData = JSON.parse(storedData);
+      this.sortListData(); 
     }
   }
-  public addItem(): void {
-    // Check if the form is valid
-    if (this.userForm.valid) {
-      // Push new item to the list
-      this.listData.push(this.userForm.value);
 
-      // Store the updated list in sessionStorage
+  public addItem(): void {
+    if (this.userForm.valid) {
+      if (this.isEditMode) {
+        this.listData[this.editIndex] = this.userForm.value;
+        this.isEditMode = false; 
+        this.editIndex = -1;
+      } else {
+        this.listData.push(this.userForm.value);
+      }
+      this.sortListData();
       sessionStorage.setItem('listData', JSON.stringify(this.listData));
-      //console.log(this.listData);
-      // Reset the form
       this.userForm.reset();
     } else {
-      // Alert the user if any field is empty
       alert('All fields are necessary to be filled!');
     }
   }
-  
+
+  public editItem(item: any): void {
+    this.isEditMode = true; 
+    this.editIndex = this.listData.indexOf(item); 
+
+    this.userForm.patchValue({
+      name: item.name,
+      category: item.category,
+      price: item.price,
+      desc: item.desc
+    });
+  }
 
   reset(): void {
     this.userForm.reset();
+    this.isEditMode = false;
+    this.editIndex = -1; 
   }
 
   removeItem(element: any): void {
     this.listData.forEach((value, index) => {
       if (value === element) {
         this.listData.splice(index, 1);
-      
-      // Update the stored data in sessionStorage after removing the item
+
         sessionStorage.setItem('listData', JSON.stringify(this.listData));
-        //console.log(this.itemsize);
       }
     });
   }
+
+  private sortListData(): void {
+    this.listData.sort((a, b) => {
+      return this.catlist.indexOf(a.category) - this.catlist.indexOf(b.category);
+    });
+  }
 }
+

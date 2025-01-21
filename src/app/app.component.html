@@ -12,7 +12,7 @@
         </svg>
       </a>
   </div>
-  <button class="back" (click)="navigateback()" > <span class="btn">&#8678; </span></button>
+  <button *ngIf="showBackButton" class="back" (click)="navigateback()" > <span class="btn">&#8678; </span></button>
   
 </div>
 

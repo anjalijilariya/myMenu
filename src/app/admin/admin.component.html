@@ -80,6 +80,7 @@
               <th>Description</th>
               <th>Price</th>
               <th>Edit Item</th>
+              <th>Delete Item</th>
             </tr>
           </thead>
           <tbody>
@@ -97,7 +98,10 @@
                 <span>{{ item.price }}</span>
               </td>
               <td class="rmv">
-                  <img class="trash"  (click)="removeItem(item)" height="50" src="https://static.vecteezy.com/system/resources/previews/021/695/680/non_2x/trash-bin-logo-icon-template-free-vector.jpg" alt="">
+                <img class="trash"  (click)="editItem(item)" height="50" src="https://icon-library.com/images/action-icon/action-icon-17.jpg" alt="">
+              </td>
+              <td class="rmv">
+                  <img class="trash"  (click)="removeItem(item)" height="50" src="https://static-00.iconduck.com/assets.00/delete-icon-1877x2048-36z5b4tn.png" alt="">
               </td>
             </tr>
           </tbody>
