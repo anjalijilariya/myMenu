@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy,  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
   standalone: false,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
 
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   loginForm: FormGroup;
+  txt: string;
 
   constructor(private router: Router, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
@@ -28,22 +30,6 @@ export class LoginComponent implements OnInit {
 
   loginCheck()
   {
-    // if(this.name==="admin" && this.passwd === "123")
-    // {
-    //   alert("Admin login successful");
-    //   this.router.navigate(['admin']);
-    // }
-
-    // else if(this.name==="customer" && this.passwd === "456")
-    // {
-    //   alert("Customer login successful");
-    //   this.router.navigate(['customer']);
-    // }
-
-    // else
-    // {
-    //   alert("Invalid Credentials");
-    // }
     console.log(this.loginForm.value);
     for (let index = 0; index < this.username.length; index++) {
       if(this.loginForm.value.name===this.username[index] && this.loginForm.value.passwd === this.password[index])
@@ -57,4 +43,11 @@ export class LoginComponent implements OnInit {
     if(this.check)
       alert("Invalid Credentials");
   }
+
+  hide = true;
+  clickEvent(event: MouseEvent) {
+    this.hide = (!this.hide);
+    event.stopPropagation();
+  }
+
 }
