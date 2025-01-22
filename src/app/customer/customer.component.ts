@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; // Import the Router
 
 @Component({
-  standalone: false,
+  // standalone: false,
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
@@ -17,7 +17,7 @@ export class CustomerComponent implements OnInit{
 
   Change(event: Event): void {
     var vari = event.target as HTMLElement;
-    this.cat = vari.innerHTML.toLowerCase(); // Get the selected category
+    this.cat = vari.id; // Get the selected category
     console.log(this.cat);
     // Get the stored listData from sessionStorage
     const storedData = sessionStorage.getItem('listData');
