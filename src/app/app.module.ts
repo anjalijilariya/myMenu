@@ -16,6 +16,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -46,6 +48,8 @@ const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
+    MatRadioModule,
+    MatTableModule,
     MatInputModule,
   ],
   providers: [],

@@ -1,78 +1,103 @@
 <div class="card">
   <form [formGroup]="userForm">
-    <div class="mt-5 box">
+    <mat-card class="bx" appearance="outlined">
+      <mat-heading class="heading">Add Items</mat-heading>
       <div class="form-row">
-        <div class="col-md-12">
-          <div class="form-group">
+        <div class="col-md-12 box">
+          <!-- <div class="form-group">
             <label>Item Name<span style="color: red;">*</span></label>
-          </div>
+          </div> -->
           <div class="form-row">
             <div class="col">
-              <input
+              <!-- <input
                 type="text"
                 formControlName="name"
                 class="form-control"
                 placeholder="Name"
-              />
+              /> -->
+              
+              <mat-form-field>
+                <mat-label class="matname">Item Name<span style="color: red;">*</span></mat-label>
+                <input matInput type="text" class="form-control" formControlName="name">
+              </mat-form-field>
             </div>
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 box">
           <div class="form-group">
             <label>Category<span style="color: red;">*</span></label>
           </div>
           <div class="form-row">
             <div class="col">
-              <select name="category" formControlName="category" class="form-control custom-select" >
-                <!-- <option value="" disabled selected>Category</option> Placeholder option -->
-                <option *ngFor="let cat of catlist" [value]="cat">{{ cat }}</option>
-              </select>
+              <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="form-control custom-select"
+                formControlName="category">
+                <mat-radio-button class="category" *ngFor="let cat of catlist" [value]="cat">{{ cat }}
+                </mat-radio-button>
+              </mat-radio-group>
             </div>
           </div>
           
         </div>
-        <div class="col-md-12">
-          <div class="form-group">
+        <div class="col-md-12 box">
+          <!-- <div class="form-group">
             <label>Description<span style="color: red;">*</span></label>
-          </div>
+          </div> -->
           <div class="form-row">
             <div class="col">
-              <input type="text" formControlName="desc" class="form-control" placeholder="Description"/>
+              <!-- <input type="text" formControlName="desc" class="form-control" placeholder="Description"/> -->
+              <mat-form-field>
+                <mat-label class="matname">Description<span style="color: red;">*</span></mat-label>
+                <input matInput type="text" class="form-control" formControlName="desc">
+              </mat-form-field>
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="form-group">
+        <div class="col-md-12 box">
+          <!-- <div class="form-group">
             <label>Price<span style="color: red;">*</span></label>
-          </div>
+          </div> -->
           <div class="form-row">
             <div class="col">
-              <input
+              <!-- <input
                 type="number"
                 formControlName="price"
                 class="form-control"
                 placeholder="Price"
-              />
+              /> -->
+              <mat-form-field>
+                <mat-label class="matname">Price<span style="color: red;">*</span></mat-label>
+                <input matInput type="number" formControlName="price" class="form-control" placeholder="$0.00" />
+                
+                <!-- <span matTextSuffix>.00</span> -->
+              </mat-form-field>
             </div>
           </div>
         </div>
         <div class="form-row mt-6">
-          <div class="col-2 d-flex justify-content-between">
-            <button type="button" class="btn btn-primary" (click)="addItem()">
+          <div class="col-2 d-flex justify-content-between buttons">
+            <!-- <button type="button" class="btn btn-primary" (click)="addItem()"> -->
+              <button mat-raised-button type="button"
+              class="btn btn-primary"
+              (click)="addItem()"
+              >
               Add
             </button>
-            <button type="button" class="btn btn-primary" (click)="reset()">
+            <!-- </button> -->
+            <button mat-raised-button type="button" class="btn btn-primary" (click)="reset()">
               Reset
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </mat-card>
   </form>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8 mt-4 mb-4">
         <table class="table table-bordered">
+          <!-- <table mat-table [dataSource]="listData" class="mat-elevation-z8 tb"> -->
           <thead>
             <tr>
               <th>Item Name</th>
@@ -80,7 +105,6 @@
               <th>Description</th>
               <th>Price</th>
               <th>Actions</th>
-              <!-- <th>Delete Item</th> -->
             </tr>
           </thead>
           <tbody>
@@ -97,16 +121,49 @@
               <td>
                 <span>{{ item.price }}</span>
               </td>
-              <td style="width: 13%;">
+              <td style="width: 8%;">
                 <div class="rmv">
-                <img class="trash"  (click)="editItem(item)" height="50" src="https://icon-library.com/images/action-icon/action-icon-17.jpg" alt="">
-              <!-- </td>
-              <td class="rmv"> -->
-                  <img class="trash"  (click)="removeItem(item)" height="50" src="https://static-00.iconduck.com/assets.00/delete-icon-1877x2048-36z5b4tn.png" alt="">
+                <!-- <img class="trash"  (click)="editItem(item)" height="50" src="https://icon-library.com/images/action-icon/action-icon-17.jpg" alt="">
+                <img class="trash"  (click)="removeItem(item)" height="50" src="https://static-00.iconduck.com/assets.00/delete-icon-1877x2048-36z5b4tn.png" alt=""> -->
+                <mat-icon class="trash"  (click)="editItem(item)">edit</mat-icon>
+                <mat-icon class="trash"  (click)="removeItem(item)">cancel</mat-icon>
                 </div>
               </td>
             </tr>
           </tbody>
+          <!-- <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Item Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container> -->
+        
+          <!-- Name Column -->
+          <!-- <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+          </ng-container> -->
+        
+          <!-- Weight Column -->
+          <!-- <ng-container matColumnDef="desc">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.desc}} </td>
+          </ng-container> -->
+        
+          <!-- Symbol Column -->
+          <!-- <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          </ng-container> -->
+
+          <!-- <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element"> <div class="rmv">
+              <img class="trash"  (click)="editItem(element)" height="50" src="https://icon-library.com/images/action-icon/action-icon-17.jpg" alt="">
+              <img class="trash"  (click)="removeItem(element)" height="50" src="https://static-00.iconduck.com/assets.00/delete-icon-1877x2048-36z5b4tn.png" alt="">
+              </div> </td>
+          </ng-container> -->
+        
+          <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
         </table>
       </div>
     </div>
