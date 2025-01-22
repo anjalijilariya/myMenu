@@ -12,7 +12,9 @@
         </svg>
       </a>
   </div>
-  <button *ngIf="showBackButton" class="back" (click)="navigateback()" > <span class="btn">&#8678; </span></button>
+  <button mat-flat-button *ngIf="showBackButton" (click)="navigateback()" class="back" >
+    <mat-icon class="btn">arrow_back</mat-icon>
+  </button>
   
 </div>
 

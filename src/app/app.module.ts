@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from './customer/menu/menu.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -36,7 +38,9 @@ const routes: Routes = [
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
