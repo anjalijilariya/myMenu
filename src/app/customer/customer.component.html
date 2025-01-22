@@ -2,22 +2,27 @@
   <div class="head" id="head">
     What would you like to try today!!  &nbsp; &nbsp;  :)
   </div>
-  <a class="food box" id="food" (click)="Change($event)">
+  <!-- <a class="food box" id="food" (click)="Change($event)">
     <div class="card">Food</div> 
-  </a>
-  <a class="bev box" id="beverages" (click)="Change($event)">
-    <div class="card">Beverages</div>
-  </a>
-  <a class="des box" id="dessert" (click)="Change($event)">
-    <div class="card">Dessert</div>
-  </a>
-  <a href="https://mdbootstrap.com/" class="insta box">
-    <div class="card">Instagram</div>
-  </a>
-  <a href="https://mdbootstrap.com/" class="fb box">
-    <div class="card">Facebook</div>
-  </a>
-  <a href="https://mdbootstrap.com/" class="ln box">
-    <div class="card">Linkedin</div>
-  </a>
+  </a> -->
+      <div class="card"><button type="button" class="box" mat-raised-button (click)="Change($event)" >
+        Food
+      </button></div>
+  
+    <div class="card"><button type="button" class="box" mat-raised-button (click)="Change($event)" >Beverages</button></div>
+  
+    <div class="card">
+      <button type="button" class="box" mat-raised-button (click)="Change($event)" >
+    Dessert </button>
+  </div>
+
+  <div class="card"><a href="https://mdbootstrap.com/" class="lnks box">
+    Instagram
+  </a>  </div>
+  <div class="card"><a href="https://mdbootstrap.com/" class="lnks box">
+    Facebook
+  </a></div>
+  <div class="card"><a href="https://mdbootstrap.com/" class="lnks box">
+    Linkedin
+  </a></div>
 </div>
