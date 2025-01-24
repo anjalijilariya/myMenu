@@ -1,4 +1,13 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+// @import '~bootstrap/dist/css/bootstrap.min.css';
+
+table {
+  width: 80%;
+  margin: auto;
+  background-color: #1976d270;
+  border-radius: 25px;
+  margin-top: 3rem;
+  box-shadow: 2px 2px 4px #000000;
+}
 
 .box{
     width: 50%;

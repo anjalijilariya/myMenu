@@ -8,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  listData: any[] = [];
-  cat = 'food';
-  heading : string;
+   listData: any[] = [];
+   cat = 'food';
+   heading : string;
 
-  constructor() {}
+   constructor() {}
 
   ngOnInit(): void {
     const storedData = sessionStorage.getItem('listData');
@@ -25,7 +25,13 @@ export class MenuComponent implements OnInit {
       this.cat = JSON.parse(category);
     }
 
+    if (this.cat) {
+      this.listData = this.listData.filter(item => item.category === this.cat);
+    }
+
     this.heading = this.cat.toUpperCase();
   }
+
+  displayedColumns: string[] = ['name', 'price'];
 
 }

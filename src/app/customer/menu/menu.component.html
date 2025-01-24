@@ -7,13 +7,24 @@
       <div class="col-md-8 mt-4 mb-4">
         <table class="table">
           <thead>
-            <tr>
-              <th>Item Name</th>
-              <th>Price</th>
+            <tr style="
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 1.5rem 0;
+        ">
+              <th >Item Name</th>
+              <th >Price</th>
             </tr>
           </thead>
+          
           <tbody *ngFor="let item of listData">
-            <tr *ngIf="item.category == cat">
+            <hr>
+            <tr *ngIf="item.category == cat"  style="
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            align-items: center;
+        ">
                 <td>
                   <div class="itm">
                     <span class="name">{{item.name}}</span>
@@ -26,4 +37,27 @@
         </table>
       </div>
     </div>
-  </div>
+  </div> 
+ 
+
+
+<!-- *******updated code************ -->
+
+  <!-- <table mat-table [dataSource]="listData" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef > Item Name </th>
+      <div *matCellDef="let element">
+        <td mat-cell *ngIf="element.category == cat"> {{element.name}} </td></div>
+    </ng-container>
+  
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <div *matCellDef="let element">
+        <td mat-cell *ngIf="element.category == cat"> {{element.price}} </td></div>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table> -->
+  
+  

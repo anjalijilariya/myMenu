@@ -78,7 +78,7 @@
         <div class="form-row mt-6">
           <div class="col-2 d-flex justify-content-between buttons">
             <!-- <button type="button" class="btn btn-primary" (click)="addItem()"> -->
-              <button mat-raised-button type="button"
+              <button mat-raised-button type="submit"
               class="btn btn-primary"
               (click)="addItem()"
               >
@@ -125,8 +125,8 @@
                 <div class="rmv">
                 <!-- <img class="trash"  (click)="editItem(item)" height="50" src="https://icon-library.com/images/action-icon/action-icon-17.jpg" alt="">
                 <img class="trash"  (click)="removeItem(item)" height="50" src="https://static-00.iconduck.com/assets.00/delete-icon-1877x2048-36z5b4tn.png" alt=""> -->
-                <mat-icon class="trash"  (click)="editItem(item)">edit</mat-icon>
-                <mat-icon class="trash"  (click)="removeItem(item)">cancel</mat-icon>
+                <mat-icon class="trash" (click)="editItem(item)">edit</mat-icon>
+                <mat-icon class="trash" (click)="removeItem(item)">cancel</mat-icon>
                 </div>
               </td>
             </tr>
