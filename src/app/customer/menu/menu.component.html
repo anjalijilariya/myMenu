@@ -1,29 +1,33 @@
 <div class="heading">
   {{heading}}
 </div>
+<table mat-table [dataSource]="listData" class="mat-elevation-z8">
+  
+  <!-- Row Number Column -->
+  <ng-container matColumnDef="no">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element; let i = index">
+      <span class="no">{{ i + 1 }}</span> <!-- Row number starts from 1 -->
+    </td>
+  </ng-container>
 
-<div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8 mt-4 mb-4">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Item Name</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let item of listData">
-            <tr *ngIf="item.category == cat">
-                <td>
-                  <div class="itm">
-                    <span class="name">{{item.name}}</span>
-                    <span class="desc">{{item.desc}}</span>
-                  </div>
-                  </td>
-                <td><span>{{item.price}}</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <!-- Item Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef class="name1"> Item Name </th>
+    <td mat-cell *matCellDef="let element">
+      <span class="name">{{ element.name }}</span>
+    </td>
+  </ng-container>
+
+  <!-- Price Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let element">
+      <span class="price">{{ element.price }}</span>
+    </td>
+  </ng-container>
+
+  <!-- Header and Rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

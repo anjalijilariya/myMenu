@@ -1,0 +1,76 @@
+
+<div class="card">
+    <form [formGroup]="userForm">
+      <mat-card class="bx" appearance="outline">
+        <mat-heading class="heading">{{head}} Category</mat-heading>
+        <div class="form-row">
+          <div class="col-md-12 box">
+            <div class="form-row">
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label class="matname">Category Type<span style="color: red;">*</span></mat-label>
+                  <input matInput type="text" placeholder="Enter the category type" formControlName="name">
+                  <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                    Category Type is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="form-row mt-6">
+            <div class="col-12 d-flex justify-content-between buttons">
+              <button 
+                mat-raised-button 
+                type="button" 
+                class="btn btn-primary custom-button w-50 wl-2"
+                (click)="AddCategory()">
+                Add Category
+              </button>
+              <button 
+                mat-raised-button 
+                type="button" 
+                class="btn btn-primary custom-button w-50 wl-2"
+                (click)="reset()">
+                Reset Category
+              </button>
+            </div>
+          </div>
+          
+        </div>
+        
+      </mat-card>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 mt-4 mb-4">
+            <table class="table table-bordered mat-elevation-z8">
+              <thead>
+                <tr>
+                  <th style="width: 50%"><span class="heading-text">Category</span> </th>
+                  <th style="width: 50%"><span class="heading-text">Total Items</span> </th>
+                  <th style="width: 50%"><span class="heading-text">Actions</span> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let category of getCategoriesWithCounts()">
+                    <td class="text-center">
+                      <span>{{ category.category | titlecase }}</span>
+                    </td>
+                    <td class="text-center">
+                      <span>{{ category.itemCount }}</span>
+                    </td>
+                    <td style="width: 8%;">
+                      <div class="rmv">
+                        <mat-icon class="trash"  (click)="editItem(item)">edit</mat-icon>
+                        <mat-icon class="trash"  (click)="removeItem(item)">cancel</mat-icon>
+                      </div>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  

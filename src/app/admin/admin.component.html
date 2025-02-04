@@ -1,171 +1,100 @@
 <div class="card">
   <form [formGroup]="userForm">
-    <mat-card class="bx" appearance="outlined">
-      <mat-heading class="heading">Add Items</mat-heading>
+    <mat-card class="bx" appearance="outline">
+      <mat-heading class="heading">{{head}} Item</mat-heading>
       <div class="form-row">
         <div class="col-md-12 box">
-          <!-- <div class="form-group">
-            <label>Item Name<span style="color: red;">*</span></label>
-          </div> -->
           <div class="form-row">
             <div class="col">
-              <!-- <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                placeholder="Name"
-              /> -->
-              
-              <mat-form-field>
+              <mat-form-field appearance="outline">
                 <mat-label class="matname">Item Name<span style="color: red;">*</span></mat-label>
-                <input matInput type="text" class="form-control" formControlName="name">
+                <input matInput type="text" placeholder="Enter the item name" formControlName="name">
+                <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                  Item Name is required.
+                </mat-error>
               </mat-form-field>
             </div>
           </div>
         </div>
         <div class="col-md-12 box">
-          <div class="form-group">
-            <label>Category<span style="color: red;">*</span></label>
-          </div>
           <div class="form-row">
             <div class="col">
-              <mat-radio-group
-                aria-labelledby="example-radio-group-label"
-                class="form-control custom-select"
-                formControlName="category">
-                <mat-radio-button class="category" *ngFor="let cat of catlist" [value]="cat">{{ cat }}
-                </mat-radio-button>
-              </mat-radio-group>
+              <mat-form-field appearance="outline" class="custom-select">
+                <mat-label class="matname">Category<span style="color: red;">*</span></mat-label>
+                <mat-select formControlName="category" panelClass="custom-panel">
+                  <mat-option *ngFor="let cat of categoryTypes" [value]="cat">{{ cat | titlecase}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                  Category is required.
+                </mat-error>
+              </mat-form-field>
             </div>
           </div>
-          
         </div>
         <div class="col-md-12 box">
-          <!-- <div class="form-group">
-            <label>Description<span style="color: red;">*</span></label>
-          </div> -->
           <div class="form-row">
             <div class="col">
-              <!-- <input type="text" formControlName="desc" class="form-control" placeholder="Description"/> -->
-              <mat-form-field>
+              <mat-form-field appearance="outline">
                 <mat-label class="matname">Description<span style="color: red;">*</span></mat-label>
-                <input matInput type="text" class="form-control" formControlName="desc">
+                <input matInput type="text" placeholder="Enter the item description" formControlName="desc">
+                <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                  Description is required.
+                </mat-error>
               </mat-form-field>
             </div>
           </div>
         </div>
         <div class="col-md-12 box">
-          <!-- <div class="form-group">
-            <label>Price<span style="color: red;">*</span></label>
-          </div> -->
           <div class="form-row">
             <div class="col">
-              <!-- <input
-                type="number"
-                formControlName="price"
-                class="form-control"
-                placeholder="Price"
-              /> -->
-              <mat-form-field>
+              <mat-form-field appearance="outline">
                 <mat-label class="matname">Price<span style="color: red;">*</span></mat-label>
-                <input matInput type="number" formControlName="price" class="form-control" placeholder="$0.00" />
-                
-                <!-- <span matTextSuffix>.00</span> -->
+                <input matInput type="number" formControlName="price"  placeholder="$0.00" />
+                <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                  Price is required.
+                </mat-error>
               </mat-form-field>
             </div>
           </div>
         </div>
         <div class="form-row mt-6">
-          <div class="col-2 d-flex justify-content-between buttons">
-            <!-- <button type="button" class="btn btn-primary" (click)="addItem()"> -->
-              <button mat-raised-button type="button"
-              class="btn btn-primary"
-              (click)="addItem()"
-              >
-              Add
+          <div class="col-12 d-flex justify-content-between buttons">
+            <button 
+              mat-raised-button 
+              type="button"
+              class="btn btn-primary custom-button w-50"
+              (click)="addItem()">
+              Add Item
             </button>
-            <!-- </button> -->
-            <button mat-raised-button type="button" class="btn btn-primary" (click)="reset()">
-              Reset
+            <button 
+              mat-raised-button 
+              type="button" 
+              class="btn btn-primary custom-button w-50 wl-2"
+              (click)="reset()">
+              Reset Item
             </button>
+            <button 
+              mat-raised-button 
+              type="button" 
+              class="btn btn-primary custom-button w-50 wl-2"
+              (click)="navigateToViewItems()">
+              View Items
+            </button>
+            
           </div>
+        </div>
+        <div style="
+        display: flex;
+        width: 98%;">
+        <button 
+              mat-raised-button 
+              type="button" 
+              class="btn btn-primary custom-button w-50 wl-2"
+              (click)="navigateToViewCategory()">
+              Add/View Category
+        </button>
         </div>
       </div>
     </mat-card>
   </form>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8 mt-4 mb-4">
-        <table class="table table-bordered">
-          <!-- <table mat-table [dataSource]="listData" class="mat-elevation-z8 tb"> -->
-          <thead>
-            <tr>
-              <th>Item Name</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of listData">
-              <td>
-                <span>{{ item.name }}</span>
-              </td>
-              <td>
-                <span>{{ item.category }}</span>
-              </td>
-              <td>
-                <span>{{ item.desc }}</span>
-              </td>
-              <td>
-                <span>{{ item.price }}</span>
-              </td>
-              <td style="width: 8%;">
-                <div class="rmv">
-                <!-- <img class="trash"  (click)="editItem(item)" height="50" src="https://icon-library.com/images/action-icon/action-icon-17.jpg" alt="">
-                <img class="trash"  (click)="removeItem(item)" height="50" src="https://static-00.iconduck.com/assets.00/delete-icon-1877x2048-36z5b4tn.png" alt=""> -->
-                <mat-icon class="trash"  (click)="editItem(item)">edit</mat-icon>
-                <mat-icon class="trash"  (click)="removeItem(item)">cancel</mat-icon>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-          <!-- <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Item Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container> -->
-        
-          <!-- Name Column -->
-          <!-- <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef> Category </th>
-            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-          </ng-container> -->
-        
-          <!-- Weight Column -->
-          <!-- <ng-container matColumnDef="desc">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.desc}} </td>
-          </ng-container> -->
-        
-          <!-- Symbol Column -->
-          <!-- <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef> Price </th>
-            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-          </ng-container> -->
-
-          <!-- <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let element"> <div class="rmv">
-              <img class="trash"  (click)="editItem(element)" height="50" src="https://icon-library.com/images/action-icon/action-icon-17.jpg" alt="">
-              <img class="trash"  (click)="removeItem(element)" height="50" src="https://static-00.iconduck.com/assets.00/delete-icon-1877x2048-36z5b4tn.png" alt="">
-              </div> </td>
-          </ng-container> -->
-        
-          <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
-        </table>
-      </div>
-    </div>
-  </div>
 </div>

@@ -80,7 +80,7 @@ input::placeholder {
   }
   
   .bx{
-    width: 40%;
+    width: 35%;
     margin: auto;
     margin-top: 2rem;
     border-radius: 2rem;
@@ -95,9 +95,6 @@ input::placeholder {
     width: 80%;
   }
 
-  .wl-2{
-    margin-left: 1rem;
-  }
 
   .custom-button {
     flex: 1; /* Make the buttons equally flexible */
@@ -110,7 +107,76 @@ input::placeholder {
   }
   .buttons {
     display: flex; /* Use flexbox for layout */
-    //gap: 10px; /* Space between buttons */
+    gap: 10px; /* Space between buttons */
   }
 
+  .rmv{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    :hover{
+      cursor: pointer;
+    }
+  }
+
+  .trash{
+    border-radius: 50%;
+    width: 27px;
+  }
+  .row{
+    margin-top: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 50%;
+    //border-radius: 20px;
+  }
+  .mat-form-field {
+    width: 94%;
+  }
+
+  .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .justify-content-between{
+    width: 95%;
+    margin: 0 auto;
+  }
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 1em;
+  }
+  
+  .tb{
+    width: 80%;
+  }
+
+  thead{
+    th{
+        text-align: center;
+        font-size: large;
+        .heading-text {
+            display: inline-block;   
+            margin: 5px;          
+            font-weight: bold;    
+          }
+    }
+    tr{
+        margin: 5px;
+    }
+  }
+
+  tbody{
+    tr{
+        td{
+            text-align: center;
+            span{
+                display: inline-block;
+                font-weight: 500;
+                margin: 4px;
+            }
+        }
+    }
+  }
   

@@ -2,27 +2,93 @@
   <div class="head" id="head">
     What would you like to try today!!  &nbsp; &nbsp;  :)
   </div>
-  <!-- <a class="food box" id="food" (click)="Change($event)">
-    <div class="card">Food</div> 
-  </a> -->
-      <div class="card"><button type="button" class="box" id="food" mat-raised-button (click)="Change($event)" >
-      Food
-      </button></div>
-  
-    <div class="card"><button type="button" class="box" id="beverages" mat-raised-button (click)="Change($event)" >Beverages</button></div>
-  
-    <div class="card">
-      <button type="button" class="box" id="dessert" mat-raised-button (click)="Change($event)" >
-    Dessert </button>
+  <div class="carousel-wrapper">
+    <div class="carousel-main">
+      <div class="slides-container">
+        <div class="slide" *ngFor="let image of images; let i = index" 
+             [class.active]="currentIndex === i"
+             [@slideAnimation]="currentIndex === i ? 'active' : 'inactive'">
+          <img [src]="image.url" [alt]="image.title">
+          <div class="slide-content">
+            <h3>{{image.title}}</h3>
+            <p>{{image.description}}</p>
+          </div>
+        </div>
+      </div> 
+    </div>
   </div>
 
-  <div class="card"><a href="https://mdbootstrap.com/" class="lnks box">
-    Instagram
-  </a>  </div>
-  <div class="card"><a href="https://mdbootstrap.com/" class="lnks box">
-    Facebook
-  </a></div>
-  <div class="card"><a href="https://mdbootstrap.com/" class="lnks box">
-    Linkedin
-  </a></div>
+  <div class="buttons-container">
+    <div class="card" *ngFor="let category of categoryTypes; let i = index">
+      <button 
+        type="button" 
+        class="box" 
+        [id]="category"
+        mat-raised-button 
+        (click)="Change($event)">
+        {{category | titlecase}}
+      </button>
+    </div>
+      <!-- <div class="card">
+        <button 
+          type="button" 
+          class="box" 
+          id="Food" 
+          mat-raised-button 
+          (click)="Change($event)">
+          Food
+        </button>
+      </div> -->
+    <!-- <div class="card">
+      <button 
+        type="button" 
+        class="box" 
+        id="Beverages" 
+        mat-raised-button 
+        (click)="Change($event)">
+        Beverages
+      </button>
+    </div> -->
+  <!-- <div class="card">
+    <button 
+      type="button" 
+      class="box" 
+      id="Dessert" 
+      mat-raised-button 
+      (click)="Change($event)">
+      Dessert
+    </button>
+  </div> -->
+  <div class="card">
+    <button 
+      type="button" 
+      class="box"  
+      mat-raised-button 
+      color="warn" 
+      (click)="gotoLink()">
+      Instagram
+    </button>
+  </div>
+  <div class="card">
+    <button 
+      type="button" 
+      class="box"  
+      mat-raised-button 
+      color="warn" 
+      (click)="gotoLink()">
+      Facebook
+    </button>
+  </div>
+  <div class="card">
+    <button 
+      type="button" 
+      class="box"  
+      id="linkedln"
+      mat-raised-button 
+      color="warn" 
+      (click)="gotoLink()">
+      Linkedln
+    </button>
+  </div>
+</div>
 </div>

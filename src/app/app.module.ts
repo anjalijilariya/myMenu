@@ -18,6 +18,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { ViewCategoryComponent } from './admin/view-category/view-category.component';
+import { ViewItemsComponent } from './admin/view-items/view-items.component';
+import { NoItemsComponent } from './no-items/no-items.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,6 +30,9 @@ const routes: Routes = [
   { path: 'customer', component: CustomerComponent },  
   { path: 'admin', component: AdminComponent },
   { path: 'error', component: ErrorPageComponent },
+  { path: 'no-items', component: NoItemsComponent },
+  { path: 'admin/view-category', component: ViewCategoryComponent },
+  { path: 'admin/view-items', component: ViewItemsComponent },
   { path: '**', component: LoginComponent },
 ];
 @NgModule({
@@ -35,7 +42,10 @@ const routes: Routes = [
     CustomerComponent,
     LoginComponent,
     MenuComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ViewCategoryComponent,
+    ViewItemsComponent,
+    NoItemsComponent
   ],
   imports: [
     FormsModule,
@@ -51,6 +61,7 @@ const routes: Routes = [
     MatRadioModule,
     MatTableModule,
     MatInputModule,
+    MatSelectModule,  
   ],
   providers: [],
   bootstrap: [AppComponent]

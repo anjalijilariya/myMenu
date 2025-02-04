@@ -1,0 +1,69 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+  .rmv{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    :hover{
+      cursor: pointer;
+    }
+  }
+
+  .trash{
+    border-radius: 50%;
+    width: 27px;
+  }
+  .row{
+    margin-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    //border-radius: 20px;
+  }
+  .mat-form-field {
+    width: 94%;
+  }
+
+  .justify-content-between{
+    width: 95%;
+    margin: 0 auto;
+  }
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 1em;
+  }
+  
+  .tb{
+    width: 80%;
+  }
+
+  .wl-2{
+    margin-left: 1rem;
+  }
+
+  thead{
+    th{
+        text-align: center;
+        font-size: large;
+        .heading-text {
+            display: inline-block;   
+            margin: 5px;          
+            font-weight: bold;    
+          }
+    }
+    tr{
+        margin: 5px;
+    }
+  }
+
+  tbody{
+    tr{
+        td{
+            text-align: center;
+            span{
+                display: inline-block;
+                font-weight: 500;
+                margin: 4px;
+            }
+        }
+    }
+  }
