@@ -36,4 +36,6 @@ export class MenuComponent implements OnInit{
     this.heading = this.cat.toUpperCase();
   }
 
+  displayedColumns: string[] = ['name', 'price'];
+
 }
