@@ -63,16 +63,28 @@ export class ViewItemsComponent implements OnInit {
   }
 
   removeItem(element: any): void {
-    this.listData.forEach((value, index) => {
-      if (value === element) {
-        this.listData.splice(index, 1);
 
-        sessionStorage.setItem('listData', JSON.stringify(this.listData));
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this!",
+      icon: "warning",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        this.listData.forEach((value, index) => {
+          if (value === element) {
+            this.listData.splice(index, 1);
+    
+            sessionStorage.setItem('listData', JSON.stringify(this.listData));
+          }
+        });
+        if (this.listData.length === 0) {
+          this.router.navigate(['/no-items']); // Redirect when list is empty
+        }
       }
     });
-    if (this.listData.length === 0) {
-      this.router.navigate(['/no-items']); // Redirect when list is empty
-    }
+
   }
 
   private sortListData(): void {

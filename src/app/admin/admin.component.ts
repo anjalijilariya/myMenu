@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
   // catlist = ['Beverages', 'Dessert', 'Food'];
   isEditMode: boolean = false; 
   head = 'Add';
+  txt = 'Add';
   editIndex: number = -1; 
   categoryTypes: string[] = ['Beverages', 'Dessert', 'Food'];
 
@@ -55,6 +56,7 @@ export class AdminComponent implements OnInit {
       this.isEditMode = true;
       this.editIndex = index;
       this.head = 'Edit';
+      this.txt = 'Update';
       //console.log(item,index);
     }
   }
@@ -83,6 +85,7 @@ export class AdminComponent implements OnInit {
       sessionStorage.removeItem('editItem');
       this.userForm.reset();
       this.head = 'Add';
+      this.txt = 'Add';
       console.log("total items: ",this.listData);
       // this.router.navigate(['/admin/view-items']);
     } 
@@ -98,6 +101,7 @@ export class AdminComponent implements OnInit {
     this.isEditMode = false;
     this.editIndex = -1; 
     this.head = 'Add';
+    this.txt = 'Add';
   }
 
   private sortListData(): void {

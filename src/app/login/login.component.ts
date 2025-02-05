@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy,  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   // standalone: false,
@@ -34,14 +35,42 @@ export class LoginComponent implements OnInit {
     for (let index = 0; index < this.username.length; index++) {
       if(this.loginForm.value.name===this.username[index] && this.loginForm.value.passwd === this.password[index])
       {
-        alert( this.usertype[index] + " login successful");
+        // alert( this.usertype[index] + " login successful");
+        swal({
+          title: "Login successful",
+          text: "Welcome "+ this.usertype[index],
+          icon: "success",
+          buttons: {
+            confirm: {
+              text: "Okay",
+              className: "ok"
+            }
+          },
+          dangerMode: false,
+        }).then((willDelete) => {
+          if (willDelete) {
+          console.log(this.username[index]);
+          }
+        });
         this.router.navigate([this.usertype[index]]);
         this.check = false;
       }
     }
 
     if(this.check)
-      alert("Invalid Credentials");
+      // swal("Login Failed", "Invalid Credentials", "error");
+    swal({
+      title: "Login Failed",
+      text: "Invalid Credentials",
+      icon: "error",
+      buttons: {
+        confirm: {
+          text: "Okay",
+          className: "ok"
+        }
+      },
+      dangerMode: false,
+    });
   }
 
   hide = true;

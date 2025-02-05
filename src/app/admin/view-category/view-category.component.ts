@@ -15,6 +15,7 @@ export class ViewCategoryComponent implements OnInit {
   // catlist = ['beverages', 'dessert', 'food'];
   isEditMode: boolean = false; 
   head = 'Add';
+  txt = 'Add';
   editIndex: number = -1; 
   categoryTypes: string[] = ['Food', 'Beverages', 'Dessert'];
 
@@ -69,6 +70,7 @@ export class ViewCategoryComponent implements OnInit {
       }
       sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
       this.head = 'Add';
+      this.txt = 'Add';
       this.reset();
       // console.log('Categories:', this.categoryTypes);
     }
@@ -79,10 +81,12 @@ export class ViewCategoryComponent implements OnInit {
     this.isEditMode = false;
     this.editIndex = -1; 
     this.head = 'Add';
+    this.txt = 'Add';
   }
 
   public editItem(item: any): void {
     this.head = 'Edit';
+    this.txt = 'Update';
     this.isEditMode = true; 
     this.editIndex = this.categoryTypes.indexOf(item.category); 
     this.userForm.patchValue({
@@ -92,22 +96,30 @@ export class ViewCategoryComponent implements OnInit {
 
   removeItem(element: any): void {
 
-    this.listData.forEach((value, index) => {
-      if (value.category === element.category) {
-        this.listData.splice(index, 1);
-
-        sessionStorage.setItem('listData', JSON.stringify(this.listData));
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this!",
+      icon: "warning",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        this.listData.forEach((value, index) => {
+          if (value.category === element.category) {
+            this.listData.splice(index, 1);
+            sessionStorage.setItem('listData', JSON.stringify(this.listData));
+          }
+        });
+    
+        this.categoryTypes.forEach((value, index) => {
+          if (value === element.category) {
+            this.categoryTypes.splice(index, 1);
+    
+            sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
+          }
+        });
       }
     });
-
-    this.categoryTypes.forEach((value, index) => {
-      if (value === element.category) {
-        this.categoryTypes.splice(index, 1);
-
-        sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
-      }
-    });
-
   }
 
   getCategoriesWithCounts(): { category: string, itemCount: number }[] {
