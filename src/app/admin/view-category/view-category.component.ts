@@ -74,6 +74,22 @@ export class ViewCategoryComponent implements OnInit {
       this.reset();
       // console.log('Categories:', this.categoryTypes);
     }
+    else 
+    {
+      // alert('All fields are necessary to be filled!');
+      swal({
+        title: "Incomplete details",
+        text: "Please fill all the details!",
+        icon: "warning",
+        buttons: {
+          confirm: {
+            text: "Okay",
+            className: "ok"
+          }
+        },
+        dangerMode: false,
+      });
+    }
   }
 
   reset(): void {

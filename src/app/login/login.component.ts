@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
       {
         // alert( this.usertype[index] + " login successful");
         swal({
-          title: "Login successful",
-          text: "Welcome "+ this.usertype[index],
+          title: this.usertype[index].toUpperCase() + " Login Successful",
+          text: "Welcome "+ this.username[index],
           icon: "success",
           buttons: {
             confirm: {

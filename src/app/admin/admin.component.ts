@@ -91,7 +91,19 @@ export class AdminComponent implements OnInit {
     } 
     else 
     {
-      alert('All fields are necessary to be filled!');
+      // alert('All fields are necessary to be filled!');
+      swal({
+        title: "Incomplete details",
+        text: "Please fill all the details!",
+        icon: "warning",
+        buttons: {
+          confirm: {
+            text: "Okay",
+            className: "ok"
+          }
+        },
+        dangerMode: false,
+      });
     }
     console.log(this.categoryTypes);
   }

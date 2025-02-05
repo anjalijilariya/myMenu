@@ -31,29 +31,29 @@ export class CustomerComponent implements OnInit{
 
   images = [
     {
-      url: '../assets/sahibaa9.webp',
-      title: 'Special Dish 1',
-      description: 'Delicious signature dish'
+      url: '../assets/i9.webp',
+      title: 'Alpha Signature dish',
+      description: 'Chole Bhature'
     },
     {
-      url: '../assets/sahibaa8.jpg',
-      title: 'Special Dish 2',
-      description: 'Chef\'s recommendation'
+      url: '../assets/i8.jpg',
+      title: 'Chef\'s recommendation',
+      description: 'Maharaja Thali'
     },
     {
-      url: '../assets/sahibaa7.jpg',
-      title: 'Special Dish 3',
-      description: 'Popular choice'
+      url: '../assets/i7.jpg',
+      title: 'Popular choice',
+      description: 'Cheesy Lasagna'
     },
     {
-      url: '../assets/sahibaa6.jpg',
-      title: 'Special Dish 4',
-      description: 'Seasonal special'
+      url: '../assets/i6.jpg',
+      title: 'Seasonal special',
+      description: 'Hakka Noodles'
     },
     {
-      url: '../assets/sahibaa5.jpg',
-      title: 'Special Dish 5',
-      description: 'Customer favorite'
+      url: '../assets/i5.jpg',
+      title: 'Customer\'s favorite',
+      description: 'Burger n Fries'
     }
   ];
   
