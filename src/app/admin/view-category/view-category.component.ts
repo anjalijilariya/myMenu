@@ -33,24 +33,44 @@ export class ViewCategoryComponent implements OnInit {
       // If categories exist in storage, load them
       this.categoryTypes = JSON.parse(storedCategories);
     }
-    const storedData = sessionStorage.getItem('categoryTypes');
+    const storedData = sessionStorage.getItem('listData');
     if (storedData) {
-      this.categoryTypes = JSON.parse(storedData);
+      this.listData = JSON.parse(storedData);
       this.sortListData(); 
-      console.log(this.categoryTypes);
+      // console.log(this.listData);
     }
+
   }
 
   AddCategory() {
     if (this.userForm.valid) {
-      const newCategory = this.userForm.get('name')?.value;
-      if (newCategory && !this.categoryTypes.includes(newCategory)) {
-        this.categoryTypes.push(newCategory);
-        sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
-        console.log('Categories:', this.categoryTypes);
-        this.reset();
-        this.head = 'Add';
+      if (this.isEditMode) {
+        // console.log(this.editIndex, this.categoryTypes[this.editIndex], this.userForm.value.name);
+        // console.log(this.listData);
+        this.listData.forEach((value) => {
+          // console.log(value.category, this.categoryTypes[this.editIndex]);
+          if (value.category == this.categoryTypes[this.editIndex].toLowerCase()) {
+            value.category = this.userForm.value.name;
+            // console.log(value);
+            // console.log(this.listData);
+            sessionStorage.setItem('listData', JSON.stringify(this.listData));
+          }
+        });
+
+        this.categoryTypes[this.editIndex] = this.userForm.value.name;
+        this.isEditMode = false; 
+        this.editIndex = -1;
+      } else {
+        const newCategory = this.userForm.get('name')?.value;
+        if (newCategory && !this.categoryTypes.includes(newCategory)) {
+          this.categoryTypes.push(newCategory);
+          // console.log('Categories:', this.categoryTypes);
+        }
       }
+      sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
+      this.head = 'Add';
+      this.reset();
+      // console.log('Categories:', this.categoryTypes);
     }
   }
 
@@ -61,8 +81,38 @@ export class ViewCategoryComponent implements OnInit {
     this.head = 'Add';
   }
 
+  public editItem(item: any): void {
+    this.head = 'Edit';
+    this.isEditMode = true; 
+    this.editIndex = this.categoryTypes.indexOf(item.category); 
+    this.userForm.patchValue({
+      name: item.category,
+    });
+  }
+
+  removeItem(element: any): void {
+
+    this.listData.forEach((value, index) => {
+      if (value.category === element.category) {
+        this.listData.splice(index, 1);
+
+        sessionStorage.setItem('listData', JSON.stringify(this.listData));
+      }
+    });
+
+    this.categoryTypes.forEach((value, index) => {
+      if (value === element.category) {
+        this.categoryTypes.splice(index, 1);
+
+        sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
+      }
+    });
+
+  }
+
   getCategoriesWithCounts(): { category: string, itemCount: number }[] {
-    return this.categoryTypes
+    
+    const buf =  this.categoryTypes
       .map(category => ({
         category: category,
         itemCount: this.listData.filter(item => 
@@ -70,6 +120,9 @@ export class ViewCategoryComponent implements OnInit {
         ).length
       }))
       .sort((a, b) => a.category.localeCompare(b.category));
+
+      // console.log(buf);
+      return buf;
   }
 
 
