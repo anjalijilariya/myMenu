@@ -89,7 +89,9 @@
         <button 
               mat-raised-button 
               type="button" 
+              [ngStyle]="isDisabled && {'cursor': 'not-allowed', 'pointer-events': 'auto'}"
               class="btn btn-primary custom-button w-50 wl-2"
+              [disabled]=isDisabled
               (click)="navigateToViewCategory()">
               Add/View Category
         </button>

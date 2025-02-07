@@ -7,6 +7,7 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .head{
   width: 100%;
   margin: 1rem;
@@ -33,11 +34,18 @@
     font-style: oblique;
     background-color: transparent;
     font-weight: bold;
-    :hover{
-      background-color: rgb(25 118 210 /70%);
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
+    &:not(:disabled) {
+      &:hover {
+        background-color: rgb(25 118 210 /70%);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  
+    &:disabled {
+      cursor: not-allowed;
+      //opacity: 0.6;  // Optional: makes disabled buttons appear faded
     }
 }
 
@@ -48,12 +56,12 @@
   justify-content: center;
   justify-items: center;
   align-items: center;
-  :hover{
-    background-color: rgb(25 118 210 /70%);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-  }
+  // :hover{
+  //   background-color: rgb(25 118 210 /70%);
+  //   color: white;
+  //   font-weight: bold;
+  //   cursor: pointer;
+  // }
 }
 
 .lnks{

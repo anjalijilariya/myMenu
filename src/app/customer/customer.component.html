@@ -25,40 +25,11 @@
         class="box" 
         [id]="category"
         mat-raised-button 
+        [disabled]="!categoryCountMap.has(category.toLowerCase())"
         (click)="Change($event)">
         {{category | titlecase}}
       </button>
     </div>
-      <!-- <div class="card">
-        <button 
-          type="button" 
-          class="box" 
-          id="Food" 
-          mat-raised-button 
-          (click)="Change($event)">
-          Food
-        </button>
-      </div> -->
-    <!-- <div class="card">
-      <button 
-        type="button" 
-        class="box" 
-        id="Beverages" 
-        mat-raised-button 
-        (click)="Change($event)">
-        Beverages
-      </button>
-    </div> -->
-  <!-- <div class="card">
-    <button 
-      type="button" 
-      class="box" 
-      id="Dessert" 
-      mat-raised-button 
-      (click)="Change($event)">
-      Dessert
-    </button>
-  </div> -->
   <div class="card">
     <button 
       type="button" 

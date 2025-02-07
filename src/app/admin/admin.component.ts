@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit {
   accessType: any;
   notAllowed = '"Category-Only"';
   cust = '""';
+  isDisabled: boolean;
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.userForm = this.fb.group({
@@ -73,6 +74,8 @@ export class AdminComponent implements OnInit {
     this.accessType = sessionStorage.getItem('accessType');
      console.log(this.accessType, this.notAllowed, this.cust);
 
+    this.isDisabled = this.accessType=='"Item-Only"'?true:false;
+    
     if(this.accessType == this.notAllowed || this.accessType == this.cust)
       this.router.navigate(['/restricted']);
   }

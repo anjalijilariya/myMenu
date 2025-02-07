@@ -29,6 +29,7 @@ export class CustomerComponent implements OnInit{
   listData: any[] = [];
   categoryTypes: string[] = [];
   loggedIn: any;
+  categoryCountMap: Map<string, number> = new Map();
 
   images = [
     {
@@ -68,6 +69,9 @@ export class CustomerComponent implements OnInit{
     if (storedData) {
       this.listData = JSON.parse(storedData);
       console.log(this.listData);
+      this.createCategoryCountMap(); 
+      // this.getCategoriesWithCounts();
+      // this.calculateCategoryItemCounts(); 
     }
     const categoryData = sessionStorage.getItem('categoryTypes'); // Get stored categories
     console.log(categoryData);
@@ -137,6 +141,27 @@ export class CustomerComponent implements OnInit{
 
   gotoLink() {
     window.open('https://mdbootstrap.com/', '_blank');
+  }
+
+  createCategoryCountMap(): void {
+    // Clear existing map
+    this.categoryCountMap.clear();
+    
+    // Count items for each category
+    this.listData.forEach(item => {
+      const category = item.category.toLowerCase();
+      this.categoryCountMap.set(
+        category, 
+        (this.categoryCountMap.get(category) || 0) + 1
+      );
+    });
+    
+    const categoryCountObject = Array.from(this.categoryCountMap).reduce((obj, [key, value]) => {
+      obj[key] = value;
+      return obj;
+    }, {} as { [key: string]: number });
+    
+    console.log('Category counts:', categoryCountObject);
   }
 
 }
