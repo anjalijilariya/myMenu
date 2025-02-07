@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   // standalone: false,
@@ -13,8 +14,9 @@ export class MenuComponent implements OnInit{
    cat = 'food';
    heading : string;
    displayedColumns: string[] = ['no', 'name', 'price'];
+   loggedIn: any;
 
-   constructor() {}
+   constructor(private router: Router) {}
 
   ngOnInit(): void {
     const storedData = sessionStorage.getItem('listData');
@@ -32,7 +34,11 @@ export class MenuComponent implements OnInit{
     if (this.cat) {
       this.listData = this.listData.filter(item => item.category.toLowerCase() === this.cat.toLowerCase());
     }
+    this.loggedIn = sessionStorage.getItem('loggedIn');
+    console.log(this.loggedIn);
 
+    if(this.loggedIn === 'false')
+      this.router.navigate(['/loggedOut']);
     this.heading = this.cat.toUpperCase();
   }
 

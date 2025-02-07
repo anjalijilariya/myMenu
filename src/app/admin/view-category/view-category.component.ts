@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ViewCategoryComponent implements OnInit {
 
-  //constructor() { }
+  // constructor() { }
   userForm: FormGroup;
   listData: any[] = [];
   // catlist = ['beverages', 'dessert', 'food'];
@@ -18,8 +18,12 @@ export class ViewCategoryComponent implements OnInit {
   txt = 'Add';
   editIndex: number = -1; 
   categoryTypes: string[] = ['Food', 'Beverages', 'Dessert'];
+  loggedIn: any;
+  accessType: any;
+  notAllowed = '"Item-Only"';
+  cust = '""';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
@@ -41,6 +45,17 @@ export class ViewCategoryComponent implements OnInit {
       // console.log(this.listData);
     }
 
+    this.loggedIn = sessionStorage.getItem('loggedIn');
+    console.log(this.loggedIn);
+
+    if(this.loggedIn === 'false')
+      this.router.navigate(['/loggedOut']);
+
+    this.accessType = sessionStorage.getItem('accessType');
+    // console.log(this.accessType, this.notAllowed);
+
+    if(this.accessType == this.notAllowed || this.accessType == this.cust)
+      this.router.navigate(['/restricted']);
   }
 
   AddCategory() {

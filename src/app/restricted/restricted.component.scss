@@ -1,0 +1,32 @@
+.error-page {
+    //text-align: center;
+    font-family: Arial, sans-serif;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+  }
+  
+  .error-page h1 {
+    font-size: 2.5em;
+    color: #d9534f; /* Bootstrap danger color */
+  }
+  
+  .error-page button {
+    font-size: 1.2em;
+    margin-top: 20px;
+    background-color: #1976d2;
+    color: white;
+    height: 3rem;
+    border-radius: 1rem;
+    padding: 0.5rem;
+  }
+
+  .btn{
+    :hover{
+        cursor: pointer;
+    }
+  }
+  

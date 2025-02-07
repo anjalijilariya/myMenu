@@ -21,19 +21,23 @@ import {MatTableModule} from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { ViewCategoryComponent } from './admin/view-category/view-category.component';
 import { ViewItemsComponent } from './admin/view-items/view-items.component';
-import { NoItemsComponent } from './no-items/no-items.component';
+import { NoItemsComponent } from './admin/no-items/no-items.component';
+import { LoggedOutComponent } from './logged-out/logged-out.component';
+import { RestrictedComponent } from './restricted/restricted.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'restricted', component: RestrictedComponent },
+  { path: 'loggedOut', component: LoggedOutComponent },
   { path: 'customer/menu', component: MenuComponent },
   { path: 'customer', component: CustomerComponent },  
   { path: 'admin', component: AdminComponent },
   { path: 'error', component: ErrorPageComponent },
-  { path: 'no-items', component: NoItemsComponent },
+  { path: 'admin/no-items', component: NoItemsComponent },
   { path: 'admin/view-category', component: ViewCategoryComponent },
   { path: 'admin/view-items', component: ViewItemsComponent },
-  { path: '**', component: LoginComponent },
+  { path: '**', component: ErrorPageComponent },
 ];
 @NgModule({
   declarations: [
@@ -45,7 +49,9 @@ const routes: Routes = [
     ErrorPageComponent,
     ViewCategoryComponent,
     ViewItemsComponent,
-    NoItemsComponent
+    NoItemsComponent,
+    LoggedOutComponent,
+    RestrictedComponent
   ],
   imports: [
     FormsModule,

@@ -15,6 +15,10 @@ export class ViewItemsComponent implements OnInit {
   catlist = ['beverages', 'dessert', 'food'];
   isEditMode: boolean = false; 
   editIndex: number = -1; 
+  loggedIn: any;
+  accessType: any;
+  notAllowed = '"Category-Only"';
+  cust = '""';
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.userForm = this.fb.group({
@@ -46,7 +50,7 @@ export class ViewItemsComponent implements OnInit {
 
     if(!storedData || JSON.parse(storedData).length === 0)
     {
-      this.router.navigate(['/no-items']);
+      this.router.navigate(['admin/no-items']);
     }
 
     if (storedData) {
@@ -54,6 +58,18 @@ export class ViewItemsComponent implements OnInit {
       this.sortListData(); 
       console.log('Sorted List Data:', this.listData);
     }
+
+    this.loggedIn = sessionStorage.getItem('loggedIn');
+    console.log(this.loggedIn);
+
+    if(this.loggedIn === 'false')
+      this.router.navigate(['/loggedOut']);
+
+    this.accessType = sessionStorage.getItem('accessType');
+    // console.log(this.accessType, this.notAllowed);
+
+    if(this.accessType == this.notAllowed || this.accessType == this.cust)
+      this.router.navigate(['/restricted']);
   }
 
   editItem(item: any, index: number): void {

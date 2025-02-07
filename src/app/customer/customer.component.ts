@@ -28,6 +28,7 @@ export class CustomerComponent implements OnInit{
   currentIndex = 0;
   listData: any[] = [];
   categoryTypes: string[] = [];
+  loggedIn: any;
 
   images = [
     {
@@ -84,7 +85,12 @@ export class CustomerComponent implements OnInit{
         .sort();
       console.log('Using stored categories:', this.categoryTypes);
     }
+    
+    this.loggedIn = sessionStorage.getItem('loggedIn');
+    console.log(this.loggedIn);
 
+    if(this.loggedIn === 'false')
+      this.router.navigate(['/loggedOut']);
 
   }
 

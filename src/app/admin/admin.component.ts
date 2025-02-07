@@ -17,6 +17,10 @@ export class AdminComponent implements OnInit {
   txt = 'Add';
   editIndex: number = -1; 
   categoryTypes: string[] = ['Beverages', 'Dessert', 'Food'];
+  loggedIn: any;
+  accessType: any;
+  notAllowed = '"Category-Only"';
+  cust = '""';
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.userForm = this.fb.group({
@@ -59,6 +63,18 @@ export class AdminComponent implements OnInit {
       this.txt = 'Update';
       //console.log(item,index);
     }
+
+    this.loggedIn = sessionStorage.getItem('loggedIn');
+    console.log(this.loggedIn);
+
+    if(this.loggedIn === 'false')
+      this.router.navigate(['/loggedOut']);
+
+    this.accessType = sessionStorage.getItem('accessType');
+     console.log(this.accessType, this.notAllowed, this.cust);
+
+    if(this.accessType == this.notAllowed || this.accessType == this.cust)
+      this.router.navigate(['/restricted']);
   }
 
   public addItem(): void 

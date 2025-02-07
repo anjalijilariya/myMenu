@@ -11,14 +11,14 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit {
   showBackButton: boolean = true;
   currentUrl: string = '';
-
+  accessType:any;
   constructor(private router: Router, private location: Location) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
-        this.showBackButton = (event.url !== '/') && (event.url !== '/login'); 
+        this.showBackButton = (event.url !== '/') && (event.url !== '/login') && (event.url !== '/loggedOut'); 
       }
     });
   }
@@ -28,9 +28,20 @@ export class AppComponent implements OnInit {
   }
 
   navigateback() {
-    if (this.currentUrl === '/no-items') {
+    if (this.currentUrl === '/admin/no-items') {
       this.router.navigate(['/admin']); // Redirect to admin page
-    } else {
+    } else if(this.currentUrl === '/loggedOut') {
+      this.router.navigate(['/']);
+    } else if(this.currentUrl === '/restricted') {
+      this.accessType = sessionStorage.getItem('accessType');
+        if(this.accessType == '"Customer"')
+          this.router.navigate(['/customer']);
+        else if(this.accessType == '"Item-Only"')
+          this.router.navigate(['/admin']);
+        else if(this.accessType == '"Category-Only"')
+          this.router.navigate(['/admin/view-category']);
+    }
+     else {
       this.location.back(); // Default behavior
     }
   }
