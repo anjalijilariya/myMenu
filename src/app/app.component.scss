@@ -219,7 +219,7 @@
   // border-radius: 10px;
   height: 37px;
     width: 24px;
-    margin-top: 69px;
+    margin-top: 60px;
     margin-left: 30px;
   background-color: transparent;
 
@@ -248,4 +248,19 @@
   :hover{
     cursor: pointer;
   }
+}
+
+.head{
+  width: -webkit-fill-available;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logout{
+  margin-top: 73px;
+  margin-right: 1rem;
+  height: 37px;
+  width: 74px;
+  background-color: rgb(212, 10, 10);
+  color: white;
 }

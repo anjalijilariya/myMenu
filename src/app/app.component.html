@@ -12,10 +12,14 @@
         </svg>
       </a>
   </div>
+  <div class="head">
   <button mat-flat-button *ngIf="showBackButton" (click)="navigateback()" class="back" >
     <mat-icon class="btn">arrow_back</mat-icon>
   </button>
-  
+  <button class="logout" mat-flat-button *ngIf="showBackButton" (click)="navigateToHome()">
+    Logout
+  </button>
+</div>
 </div>
 
 <div class="content" role="main">
