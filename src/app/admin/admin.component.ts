@@ -27,7 +27,7 @@ export class AdminComponent implements OnInit {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
-      price: ['', Validators.required],
+      price: [0, [Validators.required, Validators.min(0)]],
       desc: ['', Validators.required]
     });
   }
@@ -78,6 +78,12 @@ export class AdminComponent implements OnInit {
     
     if(this.accessType == this.notAllowed || this.accessType == this.cust)
       this.router.navigate(['/restricted']);
+  }
+
+  preventNegative(event: KeyboardEvent) {
+    if (event.key === '-' || event.key === 'e') {
+      event.preventDefault();
+    }
   }
 
   public addItem(): void 
