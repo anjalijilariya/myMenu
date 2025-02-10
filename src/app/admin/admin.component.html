@@ -24,7 +24,7 @@
                 <mat-select formControlName="category" panelClass="custom-panel">
                   <mat-option *ngFor="let cat of categoryTypes" [value]="cat">{{ cat | titlecase}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                <mat-error *ngIf="userForm.controls.category.hasError('required')">
                   Category is required.
                 </mat-error>
               </mat-form-field>
@@ -37,7 +37,7 @@
               <mat-form-field appearance="outline">
                 <mat-label class="matname">Description<span style="color: red;">*</span></mat-label>
                 <input matInput type="text" placeholder="Enter the item description" formControlName="desc">
-                <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                <mat-error *ngIf="userForm.controls.desc.hasError('required')">
                   Description is required.
                 </mat-error>
               </mat-form-field>
