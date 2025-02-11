@@ -68,11 +68,9 @@ export class CustomerComponent implements OnInit{
     const storedData = sessionStorage.getItem('listData');
     if (storedData) {
       this.listData = JSON.parse(storedData);
-      console.log(this.listData);
       this.createCategoryCountMap(); 
     }
-    const categoryData = sessionStorage.getItem('categoryTypes'); // Get stored categories
-    console.log(categoryData);
+    const categoryData = sessionStorage.getItem('categoryTypes'); 
 
     if (!categoryData || JSON.parse(categoryData).length === 0) {
       // If no categories exist in storage or categoryTypes is empty, set default categories
@@ -85,11 +83,9 @@ export class CustomerComponent implements OnInit{
       this.categoryTypes = JSON.parse(categoryData)
         .map((category: string) => category.toLowerCase())
         .sort();
-      console.log('Using stored categories:', this.categoryTypes);
     }
     
     this.loggedIn = sessionStorage.getItem('loggedIn');
-    console.log(this.loggedIn);
 
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
@@ -99,7 +95,6 @@ export class CustomerComponent implements OnInit{
   Change(event: Event): void {
     const button = event.target as HTMLElement;
     this.cat = button.textContent?.trim().toLowerCase() || '';
-    console.log(this.cat);
     const storedData = sessionStorage.getItem('listData');
 
     if (storedData) {
@@ -108,7 +103,6 @@ export class CustomerComponent implements OnInit{
       const count = parsedData.filter(item => item.category.toLowerCase() === this.cat.toLowerCase()).length;
 
       console.log('Count of items with category', this.cat, ':', count);
-      console.log(storedData);
 
       if (count > 0) {
         this.router.navigate(['/customer/menu'], { queryParams: { category: this.cat } });

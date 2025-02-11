@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ItemsService } from '../service/items.service';
 import { RestrictionService } from '../service/restriction.service';
-import { access } from 'fs';
-
 
 @Component({
   // standalone: false,
@@ -15,7 +13,6 @@ import { access } from 'fs';
 export class AdminComponent implements OnInit {
   userForm: FormGroup;
   listData: any[] = [];
-  // catlist = ['Beverages', 'Dessert', 'Food'];
   isEditMode: boolean = false; 
   head = 'Add';
   txt = 'Add';
@@ -53,7 +50,7 @@ export class AdminComponent implements OnInit {
 
     // Sort categories alphabetically
     this.categoryTypes = this.categoryTypes.map(cat => cat.toLowerCase()).sort();
-    console.log('Available Categories:', this.categoryTypes);
+    // console.log('Available Categories:', this.categoryTypes);
 
     const editData = sessionStorage.getItem('editItem');
     if (editData) 
@@ -67,7 +64,6 @@ export class AdminComponent implements OnInit {
     }
 
     this.loggedIn = sessionStorage.getItem('loggedIn');
-    console.log(this.loggedIn);
 
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
@@ -88,7 +84,6 @@ export class AdminComponent implements OnInit {
   {
     if (this.userForm.valid) 
     {
-      console.log(this.isEditMode);
       if (this.isEditMode) 
       {
         this.itemsService.updateData(this.userForm.value, this.editIndex);
@@ -121,7 +116,6 @@ export class AdminComponent implements OnInit {
         dangerMode: false,
       });
     }
-    console.log(this.categoryTypes);
   }
 
   reset(): void {

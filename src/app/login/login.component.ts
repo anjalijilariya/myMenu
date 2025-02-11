@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
 
   loginCheck()
   {
-    console.log(this.loginForm.value, this.users);
     for (let index = 0; index < this.users.length; index++) {
       if(this.loginForm.value.name===this.users[index].userName && this.loginForm.value.passwd === this.users[index].password)
       {

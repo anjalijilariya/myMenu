@@ -41,7 +41,6 @@ export class ViewCategoryComponent implements OnInit {
     }
 
     this.loggedIn = sessionStorage.getItem('loggedIn');
-    console.log(this.loggedIn);
 
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
