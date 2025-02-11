@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RestrictionService } from 'src/app/service/restriction.service';
 
 @Component({
   selector: 'app-view-category',
@@ -19,11 +20,8 @@ export class ViewCategoryComponent implements OnInit {
   editIndex: number = -1; 
   categoryTypes: string[] = ['Food', 'Beverages', 'Dessert'];
   loggedIn: any;
-  accessType: any;
-  notAllowed = '"Item-Only"';
-  cust = '""';
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private restrict: RestrictionService) {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
@@ -51,11 +49,7 @@ export class ViewCategoryComponent implements OnInit {
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
 
-    this.accessType = sessionStorage.getItem('accessType');
-    // console.log(this.accessType, this.notAllowed);
-
-    if(this.accessType == this.notAllowed || this.accessType == this.cust)
-      this.router.navigate(['/restricted']);
+    this.restrict.logOut('view-category');
   }
 
   AddCategory() {

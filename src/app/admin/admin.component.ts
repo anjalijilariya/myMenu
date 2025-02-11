@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ItemsService } from '../service/items.service';
+import { RestrictionService } from '../service/restriction.service';
+import { access } from 'fs';
+
 
 @Component({
   // standalone: false,
@@ -19,11 +23,9 @@ export class AdminComponent implements OnInit {
   categoryTypes: string[] = ['Beverages', 'Dessert', 'Food'];
   loggedIn: any;
   accessType: any;
-  notAllowed = '"Category-Only"';
-  cust = '""';
   isDisabled: boolean;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -33,10 +35,10 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const storedData = sessionStorage.getItem('listData');
+    const storedData = this.itemsService.getData();
     
     if (storedData) {
-      this.listData = JSON.parse(storedData);
+      this.listData = storedData;
       this.sortListData(); 
     }
     const categoryData = sessionStorage.getItem('categoryTypes');
@@ -71,13 +73,11 @@ export class AdminComponent implements OnInit {
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
 
-    this.accessType = sessionStorage.getItem('accessType');
-     console.log(this.accessType, this.notAllowed, this.cust);
+    console.log(76);
+    this.restrict.logOut('admin');
 
-    this.isDisabled = this.accessType=='"Item-Only"'?true:false;
-    
-    if(this.accessType == this.notAllowed || this.accessType == this.cust)
-      this.router.navigate(['/restricted']);
+    this.accessType = sessionStorage.getItem('accessType');
+    this.isDisabled = '"Item-Only"' === this.accessType?true:false;
   }
 
   preventNegative(event: KeyboardEvent) {
@@ -94,19 +94,21 @@ export class AdminComponent implements OnInit {
       console.log(this.isEditMode);
       if (this.isEditMode) 
       {
-        console.log(this.editIndex);
-        console.log(this.listData[this.editIndex]);
-        this.listData[this.editIndex] = this.userForm.value;
+        // console.log(this.editIndex);
+        // console.log(this.listData[this.editIndex]);
+        this.itemsService.updateData(this.userForm.value, this.editIndex);
+        // this.listData[this.editIndex] = this.userForm.value;
         this.isEditMode = false;
-        console.log(this.listData[this.editIndex]);
+        // console.log(this.listData[this.editIndex]);
         this.editIndex = -1;
       } 
       else 
       {
-        this.listData.push(this.userForm.value);
+        this.itemsService.addData(this.userForm.value);
+        // this.listData.push(this.userForm.value);
       }
       this.sortListData();
-      sessionStorage.setItem('listData', JSON.stringify(this.listData));
+      // sessionStorage.setItem('listData', JSON.stringify(this.listData));
       sessionStorage.removeItem('editItem');
       this.userForm.reset();
       this.head = 'Add';

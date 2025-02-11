@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ItemsService } from 'src/app/service/items.service';
+import { RestrictionService } from 'src/app/service/restriction.service';
 
 @Component({
   selector: 'app-view-items',
@@ -16,11 +18,8 @@ export class ViewItemsComponent implements OnInit {
   isEditMode: boolean = false; 
   editIndex: number = -1; 
   loggedIn: any;
-  accessType: any;
-  notAllowed = '"Category-Only"';
-  cust = '""';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -30,7 +29,7 @@ export class ViewItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const storedData = sessionStorage.getItem('listData');
+    const storedData = this.itemsService.getData();
     
     const categoryData = sessionStorage.getItem('categoryTypes');
 
@@ -48,13 +47,13 @@ export class ViewItemsComponent implements OnInit {
       console.log('Using stored categories:', this.categoryTypes);
     }
 
-    if(!storedData || JSON.parse(storedData).length === 0)
+    if(!storedData || storedData.length === 0)
     {
       this.router.navigate(['admin/no-items']);
     }
 
     if (storedData) {
-      this.listData = JSON.parse(storedData);
+      this.listData = storedData;
       this.sortListData(); 
       console.log('Sorted List Data:', this.listData);
     }
@@ -65,11 +64,7 @@ export class ViewItemsComponent implements OnInit {
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
 
-    this.accessType = sessionStorage.getItem('accessType');
-    // console.log(this.accessType, this.notAllowed);
-
-    if(this.accessType == this.notAllowed || this.accessType == this.cust)
-      this.router.navigate(['/restricted']);
+    this.restrict.logOut('view-items');
   }
 
   editItem(item: any, index: number): void {
@@ -90,9 +85,7 @@ export class ViewItemsComponent implements OnInit {
       if (willDelete) {
         this.listData.forEach((value, index) => {
           if (value === element) {
-            this.listData.splice(index, 1);
-    
-            sessionStorage.setItem('listData', JSON.stringify(this.listData));
+            this.itemsService.deleteData(index);            
           }
         });
         if (this.listData.length === 0) {
