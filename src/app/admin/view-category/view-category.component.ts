@@ -10,10 +10,8 @@ import { RestrictionService } from 'src/app/service/restriction.service';
 })
 export class ViewCategoryComponent implements OnInit {
 
-  // constructor() { }
   userForm: FormGroup;
   listData: any[] = [];
-  // catlist = ['beverages', 'dessert', 'food'];
   isEditMode: boolean = false; 
   head = 'Add';
   txt = 'Add';
@@ -40,7 +38,6 @@ export class ViewCategoryComponent implements OnInit {
     if (storedData) {
       this.listData = JSON.parse(storedData);
       this.sortListData(); 
-      // console.log(this.listData);
     }
 
     this.loggedIn = sessionStorage.getItem('loggedIn');
@@ -55,14 +52,9 @@ export class ViewCategoryComponent implements OnInit {
   AddCategory() {
     if (this.userForm.valid) {
       if (this.isEditMode) {
-        // console.log(this.editIndex, this.categoryTypes[this.editIndex], this.userForm.value.name);
-        // console.log(this.listData);
         this.listData.forEach((value) => {
-          // console.log(value.category, this.categoryTypes[this.editIndex]);
           if (value.category == this.categoryTypes[this.editIndex].toLowerCase()) {
             value.category = this.userForm.value.name;
-            // console.log(value);
-            // console.log(this.listData);
             sessionStorage.setItem('listData', JSON.stringify(this.listData));
           }
         });
@@ -74,18 +66,15 @@ export class ViewCategoryComponent implements OnInit {
         const newCategory = this.userForm.get('name')?.value;
         if (newCategory && !this.categoryTypes.includes(newCategory)) {
           this.categoryTypes.push(newCategory);
-          // console.log('Categories:', this.categoryTypes);
         }
       }
       sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
       this.head = 'Add';
       this.txt = 'Add';
       this.reset();
-      // console.log('Categories:', this.categoryTypes);
     }
     else 
     {
-      // alert('All fields are necessary to be filled!');
       swal({
         title: "Incomplete details",
         text: "Please fill all the details!",
@@ -158,7 +147,6 @@ export class ViewCategoryComponent implements OnInit {
       }))
       .sort((a, b) => a.category.localeCompare(b.category));
 
-      // console.log(buf);
       return buf;
   }
 

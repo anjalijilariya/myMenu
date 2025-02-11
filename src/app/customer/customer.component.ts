@@ -70,8 +70,6 @@ export class CustomerComponent implements OnInit{
       this.listData = JSON.parse(storedData);
       console.log(this.listData);
       this.createCategoryCountMap(); 
-      // this.getCategoriesWithCounts();
-      // this.calculateCategoryItemCounts(); 
     }
     const categoryData = sessionStorage.getItem('categoryTypes'); // Get stored categories
     console.log(categoryData);

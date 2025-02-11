@@ -107,8 +107,6 @@ export class ViewItemsComponent implements OnInit {
         return indexA - indexB;
       }
       
-      // If categories are the same, sort by name
-      // return a.name.localeCompare(b.name);
     });
   }
 }

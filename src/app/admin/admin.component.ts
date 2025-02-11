@@ -64,7 +64,6 @@ export class AdminComponent implements OnInit {
       this.editIndex = index;
       this.head = 'Edit';
       this.txt = 'Update';
-      //console.log(item,index);
     }
 
     this.loggedIn = sessionStorage.getItem('loggedIn');
@@ -73,7 +72,6 @@ export class AdminComponent implements OnInit {
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
 
-    console.log(76);
     this.restrict.logOut('admin');
 
     this.accessType = sessionStorage.getItem('accessType');
@@ -88,37 +86,28 @@ export class AdminComponent implements OnInit {
 
   public addItem(): void 
   {
-    console.log("hello");
     if (this.userForm.valid) 
     {
       console.log(this.isEditMode);
       if (this.isEditMode) 
       {
-        // console.log(this.editIndex);
-        // console.log(this.listData[this.editIndex]);
         this.itemsService.updateData(this.userForm.value, this.editIndex);
-        // this.listData[this.editIndex] = this.userForm.value;
         this.isEditMode = false;
-        // console.log(this.listData[this.editIndex]);
         this.editIndex = -1;
       } 
       else 
       {
         this.itemsService.addData(this.userForm.value);
-        // this.listData.push(this.userForm.value);
       }
       this.sortListData();
-      // sessionStorage.setItem('listData', JSON.stringify(this.listData));
       sessionStorage.removeItem('editItem');
       this.userForm.reset();
       this.head = 'Add';
       this.txt = 'Add';
       console.log("total items: ",this.listData);
-      // this.router.navigate(['/admin/view-items']);
     } 
     else 
     {
-      // alert('All fields are necessary to be filled!');
       swal({
         title: "Incomplete details",
         text: "Please fill all the details!",

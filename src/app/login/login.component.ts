@@ -12,9 +12,6 @@ import swal from 'sweetalert';
 })
 export class LoginComponent implements OnInit {
 
-  // username = ['admin1', 'admin2' , 'client1', 'client2'];
-  // usertype = ['admin', 'admin', 'customer', 'customer'];
-  // password = ['123', '456', '789', 'abc'];
   loggedIn: boolean;
   accessType: any;
 
@@ -73,7 +70,6 @@ export class LoginComponent implements OnInit {
     for (let index = 0; index < this.users.length; index++) {
       if(this.loginForm.value.name===this.users[index].userName && this.loginForm.value.passwd === this.users[index].password)
       {
-        // alert( this.usertype[index] + " login successful");
         swal({
           title: this.users[index].userType.toUpperCase() + " Login Successful",
           text: "Welcome "+ this.users[index].userName,
@@ -103,7 +99,6 @@ export class LoginComponent implements OnInit {
     }
 
     if(!this.loggedIn)
-      // swal("Login Failed", "Invalid Credentials", "error");
     swal({
       title: "Login Failed",
       text: "Invalid Credentials",

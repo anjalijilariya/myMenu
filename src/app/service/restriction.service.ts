@@ -11,12 +11,6 @@ export class RestrictionService {
 
   accessType:any;
 
-  ngOnInit(): void {
-
-    this.accessType = sessionStorage.getItem('accessType');
-    console.log(17);
-  }
-
   logOut(page: string) {
     
     this.accessType = sessionStorage.getItem('accessType');
