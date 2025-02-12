@@ -27,7 +27,7 @@ export class AdminComponent implements OnInit {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
-      price: [0, [Validators.required, Validators.min(0)]],
+      price: [, [Validators.required, Validators.min(0)]],
       desc: ['', Validators.required]
     });
   }
