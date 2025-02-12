@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
   editIndex: number = -1; 
   categoryTypes: string[] = ['Beverages', 'Dessert', 'Food'];
   loggedIn: any;
-  accessType: any;
+  accessType: string;
   isDisabled: boolean;
 
   constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService, private sweetAlert: SweetAlertService) {
@@ -62,8 +62,8 @@ export class AdminComponent implements OnInit {
       this.editIndex = index;
       this.head = 'Edit';
       this.txt = 'Update';
+      localStorage.removeItem('editItem');
     }
-    localStorage.removeItem('editItem');
 
     this.loggedIn = localStorage.getItem('loggedIn');
 
@@ -73,7 +73,7 @@ export class AdminComponent implements OnInit {
     this.restrict.restrict('admin');
 
     this.accessType = localStorage.getItem('accessType');
-    this.isDisabled = '"Item-Only"' === this.accessType?true:false;
+    this.isDisabled = 'Item-Only' === this.accessType?true:false;
   }
 
   preventNegative(event: KeyboardEvent) {

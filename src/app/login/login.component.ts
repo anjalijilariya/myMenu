@@ -13,7 +13,7 @@ import { SweetAlertService } from '../service/sweet-alert.service';
 export class LoginComponent implements OnInit {
 
   loggedIn: boolean;
-  accessType: any;
+  accessType: string;
 
   users: any = [
     {
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
         this.loggedIn = true;
         localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn));
         this.accessType = this.users[index].access;
-        localStorage.setItem('accessType', JSON.stringify(this.accessType));
+        localStorage.setItem('accessType', this.accessType);
         if(this.accessType === '')
           this.router.navigate(['customer']);
         else if(this.accessType === 'Item-Only')
