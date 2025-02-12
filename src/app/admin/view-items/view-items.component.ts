@@ -64,7 +64,7 @@ export class ViewItemsComponent implements OnInit {
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
 
-    this.restrict.logOut('view-items');
+    this.restrict.restrict('view-items');
   }
 
   editItem(item: any, index: number): void {

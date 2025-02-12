@@ -47,7 +47,7 @@ export class ViewCategoryComponent implements OnInit {
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
 
-    this.restrict.logOut('view-category');
+    this.restrict.restrict('view-category');
   }
 
   AddCategory() {

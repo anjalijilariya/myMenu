@@ -62,7 +62,7 @@ input::placeholder {
   }
 
   .name{
-    font-weight: bold;
+    font-weight: 500;
     font-size: large;
     // font-family: cursive;
     display: flex;
@@ -78,11 +78,5 @@ input::placeholder {
   }
 
   .heading{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: x-large;
-    font-weight: bolder;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0 2rem 4rem 2rem;
   }

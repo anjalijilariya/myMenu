@@ -70,7 +70,7 @@ export class AdminComponent implements OnInit {
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
 
-    this.restrict.logOut('admin');
+    this.restrict.restrict('admin');
 
     this.accessType = localStorage.getItem('accessType');
     this.isDisabled = '"Item-Only"' === this.accessType?true:false;

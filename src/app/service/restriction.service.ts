@@ -11,7 +11,7 @@ export class RestrictionService {
 
   accessType:any;
 
-  logOut(page: string) {
+  restrict(page: string) {
     
     this.accessType = localStorage.getItem('accessType');
     if(((this.accessType === '"Category-only"' || this.accessType ==='""') && page === 'admin') || 

@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Hentaigana:wght@200..900&display=swap');
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -11,3 +12,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .swal-title, .swal-text{
     color: black;
 }
+
+  .heading{
+    font-size: xx-large;
+    font-family: "Noto Serif Hentaigana", serif;
+    color: #004f9d;
+    font-weight: 500;
+    display: block; /* Ensure it's treated like a block element */
+    text-align: center;
+    margin: 2rem;
+    padding-top: 1rem;
+  } 
