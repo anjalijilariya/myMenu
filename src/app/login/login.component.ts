@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.accessType ='';
     this.loggedIn = false;
-    sessionStorage.setItem('loggedIn', JSON.stringify(this.loggedIn));
+    localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn));
   }
   
   loginForm: FormGroup;
@@ -72,9 +72,9 @@ export class LoginComponent implements OnInit {
         this.sweetAlert.successAlert(this.users[index].userType.toUpperCase() + " Login Successful", "Welcome "+ this.users[index].userName);
 
         this.loggedIn = true;
-        sessionStorage.setItem('loggedIn', JSON.stringify(this.loggedIn));
+        localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn));
         this.accessType = this.users[index].access;
-        sessionStorage.setItem('accessType', JSON.stringify(this.accessType));
+        localStorage.setItem('accessType', JSON.stringify(this.accessType));
         if(this.accessType === '')
           this.router.navigate(['customer']);
         else if(this.accessType === 'Item-Only')

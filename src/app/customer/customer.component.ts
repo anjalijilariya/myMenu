@@ -65,18 +65,18 @@ export class CustomerComponent implements OnInit{
     setInterval(() => {
       this.navigate('next');
     }, 3000);
-    const storedData = sessionStorage.getItem('listData');
+    const storedData = localStorage.getItem('listData');
     if (storedData) {
       this.listData = JSON.parse(storedData);
       this.createCategoryCountMap(); 
     }
-    const categoryData = sessionStorage.getItem('categoryTypes'); 
+    const categoryData = localStorage.getItem('categoryTypes'); 
 
     if (!categoryData || JSON.parse(categoryData).length === 0) {
       // If no categories exist in storage or categoryTypes is empty, set default categories
       const defaultCategories = ['beverages', 'dessert', 'food'];
       this.categoryTypes = defaultCategories;
-      sessionStorage.setItem('categoryTypes', JSON.stringify(defaultCategories));
+      localStorage.setItem('categoryTypes', JSON.stringify(defaultCategories));
       console.log('Initialized with default categories:', this.categoryTypes);
     } else {
       // If categories exist in storage, use those
@@ -85,7 +85,7 @@ export class CustomerComponent implements OnInit{
         .sort();
     }
     
-    this.loggedIn = sessionStorage.getItem('loggedIn');
+    this.loggedIn = localStorage.getItem('loggedIn');
 
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
@@ -95,7 +95,7 @@ export class CustomerComponent implements OnInit{
   Change(event: Event): void {
     const button = event.target as HTMLElement;
     this.cat = button.textContent?.trim().toLowerCase() || '';
-    const storedData = sessionStorage.getItem('listData');
+    const storedData = localStorage.getItem('listData');
 
     if (storedData) {
       const parsedData = JSON.parse(storedData);
@@ -114,7 +114,7 @@ export class CustomerComponent implements OnInit{
       this.router.navigate(['/error']);
     }
     
-    sessionStorage.setItem('cat', JSON.stringify(this.cat));
+    localStorage.setItem('cat', JSON.stringify(this.cat));
   }
 
   navigate(direction: 'prev' | 'next') {

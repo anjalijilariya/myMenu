@@ -11,22 +11,22 @@ export class ItemsService {
 
   addData(data: any) {
     this.listData.push(data);
-    sessionStorage.setItem('listData', JSON.stringify(this.listData));
+    localStorage.setItem('listData', JSON.stringify(this.listData));
   }
 
   updateData(data: any, index: number) {
     this.listData[index] = data;
-    sessionStorage.setItem('listData', JSON.stringify(this.listData));
+    localStorage.setItem('listData', JSON.stringify(this.listData));
   }
 
   deleteData(index: number, type: string, storeTo: any) {
     storeTo.splice(index, 1);
-    sessionStorage.setItem(type, JSON.stringify(storeTo));
+    localStorage.setItem(type, JSON.stringify(storeTo));
     
   }
 
   getData() {
-    this.listData = JSON.parse(sessionStorage.getItem('listData') || '[]');
+    this.listData = JSON.parse(localStorage.getItem('listData') || '[]');
     return this.listData;
   }
 

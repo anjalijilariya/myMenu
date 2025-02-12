@@ -39,11 +39,11 @@ export class AdminComponent implements OnInit {
       this.listData = storedData;
       this.itemsService.sortListData(this.listData, this.categoryTypes);
     }
-    const categoryData = sessionStorage.getItem('categoryTypes');
+    const categoryData = localStorage.getItem('categoryTypes');
 
     if (!categoryData) {
       // If no categories exist in storage, store the default ones
-      sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
+      localStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
     } else {
       // If categories exist in storage, use those
       this.categoryTypes = JSON.parse(categoryData);
@@ -53,7 +53,7 @@ export class AdminComponent implements OnInit {
     this.categoryTypes = this.categoryTypes.map(cat => cat.toLowerCase()).sort();
     // console.log('Available Categories:', this.categoryTypes);
 
-    const editData = sessionStorage.getItem('editItem');
+    const editData = localStorage.getItem('editItem');
     if (editData) 
       {
       const { item, index } = JSON.parse(editData);
@@ -64,14 +64,14 @@ export class AdminComponent implements OnInit {
       this.txt = 'Update';
     }
 
-    this.loggedIn = sessionStorage.getItem('loggedIn');
+    this.loggedIn = localStorage.getItem('loggedIn');
 
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
 
     this.restrict.logOut('admin');
 
-    this.accessType = sessionStorage.getItem('accessType');
+    this.accessType = localStorage.getItem('accessType');
     this.isDisabled = '"Item-Only"' === this.accessType?true:false;
   }
 
@@ -97,7 +97,7 @@ export class AdminComponent implements OnInit {
       }
 
       this.itemsService.sortListData(this.listData, this.categoryTypes);
-      sessionStorage.removeItem('editItem');
+      localStorage.removeItem('editItem');
       this.userForm.reset();
       this.head = 'Add';
       this.txt = 'Add';

@@ -32,13 +32,13 @@ export class ViewItemsComponent implements OnInit {
   ngOnInit(): void {
     const storedData = this.itemsService.getData();
     
-    const categoryData = sessionStorage.getItem('categoryTypes');
+    const categoryData = localStorage.getItem('categoryTypes');
 
     if (!categoryData || JSON.parse(categoryData).length === 0) {
       // If no categories exist in storage or categoryTypes is empty, set default categories
       const defaultCategories = ['beverages', 'dessert', 'food'];
       this.categoryTypes = defaultCategories;
-      sessionStorage.setItem('categoryTypes', JSON.stringify(defaultCategories));
+      localStorage.setItem('categoryTypes', JSON.stringify(defaultCategories));
       console.log('Initialized with default categories:', this.categoryTypes);
     } else {
       // If categories exist in storage, use those
@@ -58,7 +58,7 @@ export class ViewItemsComponent implements OnInit {
       this.itemsService.sortListData(this.listData, this.categoryTypes);
     }
 
-    this.loggedIn = sessionStorage.getItem('loggedIn');
+    this.loggedIn = localStorage.getItem('loggedIn');
     console.log(this.loggedIn);
 
     if(this.loggedIn === 'false')
@@ -69,7 +69,7 @@ export class ViewItemsComponent implements OnInit {
 
   editItem(item: any, index: number): void {
     console.log(this.listData);
-    sessionStorage.setItem('editItem', JSON.stringify({ item, index })); // Store item and index
+    localStorage.setItem('editItem', JSON.stringify({ item, index })); // Store item and index
     this.router.navigate(['/admin']); // Navigate to the admin page
   }
 
@@ -86,7 +86,7 @@ export class ViewItemsComponent implements OnInit {
       }
     });
     if (this.listData.length === 0) {
-      this.router.navigate(['/no-items']); // Redirect when list is empty
+      this.router.navigate(['/admin/no-items']); // Redirect when list is empty
     }
   }
 

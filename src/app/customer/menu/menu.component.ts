@@ -19,12 +19,12 @@ export class MenuComponent implements OnInit{
    constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const storedData = sessionStorage.getItem('listData');
+    const storedData = localStorage.getItem('listData');
     if (storedData) {
       this.listData = JSON.parse(storedData);
     }
 
-    const category = sessionStorage.getItem('cat');
+    const category = localStorage.getItem('cat');
     if(category){
       this.cat = JSON.parse(category);
     }
@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit{
     if (this.cat) {
       this.listData = this.listData.filter(item => item.category.toLowerCase() === this.cat.toLowerCase());
     }
-    this.loggedIn = sessionStorage.getItem('loggedIn');
+    this.loggedIn = localStorage.getItem('loggedIn');
 
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);

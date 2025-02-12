@@ -13,7 +13,7 @@ export class RestrictionService {
 
   logOut(page: string) {
     
-    this.accessType = sessionStorage.getItem('accessType');
+    this.accessType = localStorage.getItem('accessType');
     if(((this.accessType === '"Category-only"' || this.accessType ==='""') && page === 'admin') || 
     ((this.accessType === '"Category-only"' || this.accessType ==='""') && page === 'view-items') ||
     ((this.accessType === '"Item-Only"' || this.accessType ==='""') && page === 'view-category'))

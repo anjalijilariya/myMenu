@@ -28,21 +28,21 @@ export class ViewCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const storedCategories = sessionStorage.getItem('categoryTypes');
+    const storedCategories = localStorage.getItem('categoryTypes');
     if (!storedCategories) {
       // If no categories in storage, store the default ones
-      sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
+      localStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
     } else {
       // If categories exist in storage, load them
       this.categoryTypes = JSON.parse(storedCategories);
     }
-    const storedData = sessionStorage.getItem('listData');
+    const storedData = localStorage.getItem('listData');
     if (storedData) {
       this.listData = JSON.parse(storedData);
       this.itemsService.sortListData(this.listData, this.categoryTypes);
     }
 
-    this.loggedIn = sessionStorage.getItem('loggedIn');
+    this.loggedIn = localStorage.getItem('loggedIn');
 
     if(this.loggedIn === 'false')
       this.router.navigate(['/loggedOut']);
@@ -56,7 +56,7 @@ export class ViewCategoryComponent implements OnInit {
         this.listData.forEach((value) => {
           if (value.category == this.categoryTypes[this.editIndex].toLowerCase()) {
             value.category = this.userForm.value.name;
-            sessionStorage.setItem('listData', JSON.stringify(this.listData));
+            localStorage.setItem('listData', JSON.stringify(this.listData));
           }
         });
 
@@ -69,7 +69,7 @@ export class ViewCategoryComponent implements OnInit {
           this.categoryTypes.push(newCategory);
         }
       }
-      sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
+      localStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
       this.head = 'Add';
       this.txt = 'Add';
       this.reset();
