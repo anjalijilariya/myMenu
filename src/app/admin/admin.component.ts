@@ -63,6 +63,7 @@ export class AdminComponent implements OnInit {
       this.head = 'Edit';
       this.txt = 'Update';
     }
+    localStorage.removeItem('editItem');
 
     this.loggedIn = localStorage.getItem('loggedIn');
 
