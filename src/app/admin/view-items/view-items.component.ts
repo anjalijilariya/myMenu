@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ItemsService } from 'src/app/service/items.service';
 import { RestrictionService } from 'src/app/service/restriction.service';
+import { SweetAlertService } from 'src/app/service/sweet-alert.service';
 
 @Component({
   selector: 'app-view-items',
@@ -19,7 +20,7 @@ export class ViewItemsComponent implements OnInit {
   editIndex: number = -1; 
   loggedIn: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService) {
+  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService, private sweetAlert: SweetAlertService) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -54,8 +55,7 @@ export class ViewItemsComponent implements OnInit {
 
     if (storedData) {
       this.listData = storedData;
-      this.sortListData(); 
-      console.log('Sorted List Data:', this.listData);
+      this.itemsService.sortListData(this.listData, this.categoryTypes);
     }
 
     this.loggedIn = sessionStorage.getItem('loggedIn');
@@ -75,40 +75,21 @@ export class ViewItemsComponent implements OnInit {
 
   removeItem(element: any): void {
 
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this!",
-      icon: "warning",
-      buttons: ["Cancel", "Delete"],
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        this.listData.forEach((value, index) => {
-          if (value === element) {
-            this.itemsService.deleteData(index);            
-          }
-        });
-        if (this.listData.length === 0) {
-          this.router.navigate(['/no-items']); // Redirect when list is empty
-        }
-      }
-    });
+    this.sweetAlert.deleteWarningAlert('Are you sure?', 'Once deleted, you will not be able to recover this!', () => this.callback(element));
 
   }
 
-  private sortListData(): void {
-    this.listData.sort((a, b) => {
-      // Get the index of each category in categoryTypes
-      const indexA = this.categoryTypes.indexOf(a.category.toLowerCase());
-      const indexB = this.categoryTypes.indexOf(b.category.toLowerCase());
-      
-      // Sort by category index
-      if (indexA !== indexB) {
-        return indexA - indexB;
+  callback(element: any): void {
+    this.listData.forEach((value, index) => {
+      if (value === element) {
+        this.itemsService.deleteData(index, 'listData', this.listData);            
       }
-      
     });
+    if (this.listData.length === 0) {
+      this.router.navigate(['/no-items']); // Redirect when list is empty
+    }
   }
+
 }
 
 

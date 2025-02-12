@@ -19,9 +19,10 @@ export class ItemsService {
     sessionStorage.setItem('listData', JSON.stringify(this.listData));
   }
 
-  deleteData(index: number) {
-    this.listData.splice(index, 1);
-    sessionStorage.setItem('listData', JSON.stringify(this.listData));
+  deleteData(index: number, type: string, storeTo: any) {
+    storeTo.splice(index, 1);
+    sessionStorage.setItem(type, JSON.stringify(storeTo));
+    
   }
 
   getData() {
@@ -29,5 +30,17 @@ export class ItemsService {
     return this.listData;
   }
 
-  
+  sortListData(list:any, cat:any): void {
+    list.sort((a, b) => {
+      // Get the index of each category in categoryTypes
+      const indexA = cat.indexOf(a.category.toLowerCase());
+      const indexB = cat.indexOf(b.category.toLowerCase());
+      
+      // Sort by category index
+      if (indexA !== indexB) {
+        return indexA - indexB;
+      }
+      
+    });
+  }
 }

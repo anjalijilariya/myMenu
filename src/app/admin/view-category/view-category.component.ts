@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ItemsService } from 'src/app/service/items.service';
 import { RestrictionService } from 'src/app/service/restriction.service';
+import { SweetAlertService } from 'src/app/service/sweet-alert.service';
 
 @Component({
   selector: 'app-view-category',
@@ -19,7 +21,7 @@ export class ViewCategoryComponent implements OnInit {
   categoryTypes: string[] = ['Food', 'Beverages', 'Dessert'];
   loggedIn: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private restrict: RestrictionService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private restrict: RestrictionService, private sweetAlert: SweetAlertService, private itemsService: ItemsService) {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
@@ -37,7 +39,7 @@ export class ViewCategoryComponent implements OnInit {
     const storedData = sessionStorage.getItem('listData');
     if (storedData) {
       this.listData = JSON.parse(storedData);
-      this.sortListData(); 
+      this.itemsService.sortListData(this.listData, this.categoryTypes);
     }
 
     this.loggedIn = sessionStorage.getItem('loggedIn');
@@ -74,18 +76,7 @@ export class ViewCategoryComponent implements OnInit {
     }
     else 
     {
-      swal({
-        title: "Incomplete details",
-        text: "Please fill all the details!",
-        icon: "warning",
-        buttons: {
-          confirm: {
-            text: "Okay",
-            className: "ok"
-          }
-        },
-        dangerMode: false,
-      });
+      this.sweetAlert.warningAlert("Incomplete details", "Please fill all the details!");
     }
   }
 
@@ -109,28 +100,19 @@ export class ViewCategoryComponent implements OnInit {
 
   removeItem(element: any): void {
 
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this!",
-      icon: "warning",
-      buttons: ["Cancel", "Delete"],
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        this.listData.forEach((value, index) => {
-          if (value.category === element.category) {
-            this.listData.splice(index, 1);
-            sessionStorage.setItem('listData', JSON.stringify(this.listData));
-          }
-        });
-    
-        this.categoryTypes.forEach((value, index) => {
-          if (value === element.category) {
-            this.categoryTypes.splice(index, 1);
-    
-            sessionStorage.setItem('categoryTypes', JSON.stringify(this.categoryTypes));
-          }
-        });
+    this.sweetAlert.deleteWarningAlert('Are you sure?', 'Once deleted, you will not be able to recover this!', () => this.callback(element));
+  }
+
+  callback(element: any): void {
+    this.listData.forEach((value, index) => {
+      if (value.category === element.category) {
+        this.itemsService.deleteData(index, 'listData', this.listData);
+      }
+    });
+
+    this.categoryTypes.forEach((value, index) => {
+      if (value === element.category) {
+        this.itemsService.deleteData(index, 'categoryTypes', this.categoryTypes);
       }
     });
   }
@@ -148,14 +130,6 @@ export class ViewCategoryComponent implements OnInit {
 
       return buf;
   }
-
-
-  private sortListData(): void {
-    this.listData.sort((a, b) => {
-      return this.categoryTypes.indexOf(a.category) - this.categoryTypes.indexOf(b.category);
-    });
-  }
-
 
 }
 

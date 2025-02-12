@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ItemsService } from '../service/items.service';
 import { RestrictionService } from '../service/restriction.service';
+import { SweetAlertService } from '../service/sweet-alert.service';
 
 @Component({
   // standalone: false,
@@ -22,7 +23,7 @@ export class AdminComponent implements OnInit {
   accessType: any;
   isDisabled: boolean;
 
-  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService) {
+  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService, private sweetAlert: SweetAlertService) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -36,7 +37,7 @@ export class AdminComponent implements OnInit {
     
     if (storedData) {
       this.listData = storedData;
-      this.sortListData(); 
+      this.itemsService.sortListData(this.listData, this.categoryTypes);
     }
     const categoryData = sessionStorage.getItem('categoryTypes');
 
@@ -94,7 +95,8 @@ export class AdminComponent implements OnInit {
       {
         this.itemsService.addData(this.userForm.value);
       }
-      this.sortListData();
+
+      this.itemsService.sortListData(this.listData, this.categoryTypes);
       sessionStorage.removeItem('editItem');
       this.userForm.reset();
       this.head = 'Add';
@@ -103,18 +105,7 @@ export class AdminComponent implements OnInit {
     } 
     else 
     {
-      swal({
-        title: "Incomplete details",
-        text: "Please fill all the details!",
-        icon: "warning",
-        buttons: {
-          confirm: {
-            text: "Okay",
-            className: "ok"
-          }
-        },
-        dangerMode: false,
-      });
+      this.sweetAlert.warningAlert("Incomplete details", "Please fill all the details!");
     }
   }
 
@@ -124,12 +115,6 @@ export class AdminComponent implements OnInit {
     this.editIndex = -1; 
     this.head = 'Add';
     this.txt = 'Add';
-  }
-
-  private sortListData(): void {
-    this.listData.sort((a, b) => {
-      return this.categoryTypes.indexOf(a.category) - this.categoryTypes.indexOf(b.category);
-    });
   }
 
   navigateToViewItems() {

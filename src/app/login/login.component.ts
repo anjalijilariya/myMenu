@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy,  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import swal from 'sweetalert';
+import { SweetAlertService } from '../service/sweet-alert.service';
 
 @Component({
   // standalone: false,
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   txt: string;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(private router: Router, private fb: FormBuilder, private sweetAlert: SweetAlertService) {
     this.loginForm = this.fb.group({
       name: ['', Validators.required], // Form control for 'Name' with validation
       passwd: ['', Validators.required], // Form control for 'Password' with validation
@@ -69,18 +69,7 @@ export class LoginComponent implements OnInit {
     for (let index = 0; index < this.users.length; index++) {
       if(this.loginForm.value.name===this.users[index].userName && this.loginForm.value.passwd === this.users[index].password)
       {
-        swal({
-          title: this.users[index].userType.toUpperCase() + " Login Successful",
-          text: "Welcome "+ this.users[index].userName,
-          icon: "success",
-          buttons: {
-            confirm: {
-              text: "Okay",
-              className: "ok"
-            }
-          },
-          dangerMode: false,
-        });
+        this.sweetAlert.successAlert(this.users[index].userType.toUpperCase() + " Login Successful", "Welcome "+ this.users[index].userName);
 
         this.loggedIn = true;
         sessionStorage.setItem('loggedIn', JSON.stringify(this.loggedIn));
@@ -98,18 +87,7 @@ export class LoginComponent implements OnInit {
     }
 
     if(!this.loggedIn)
-    swal({
-      title: "Login Failed",
-      text: "Invalid Credentials",
-      icon: "error",
-      buttons: {
-        confirm: {
-          text: "Okay",
-          className: "ok"
-        }
-      },
-      dangerMode: false,
-    });
+    this.sweetAlert.errorAlert("Login Failed", "Invalid Credentials");
   }
 
   hide = true;
