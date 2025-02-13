@@ -118,12 +118,13 @@
     margin-right: 4px;
   }
 
-  svg#clouds {
+  #clouds {
     position: fixed;
-    bottom: -160px;
-    left: -230px;
+    // bottom: -160px;
+    // left: -230px;
     z-index: -10;
-    width: 1920px;
+    width: 100%;
+    height: -webkit-fill-available;
   }
 
 

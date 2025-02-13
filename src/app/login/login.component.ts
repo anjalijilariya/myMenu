@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   txt: string;
 
-  constructor(private router: Router, private fb: FormBuilder, private sweetAlert: SweetAlertService) {
+  constructor(private router: Router, private fb: FormBuilder, private Alert: SweetAlertService) {
     this.loginForm = this.fb.group({
       name: ['', Validators.required], // Form control for 'Name' with validation
       passwd: ['', Validators.required], // Form control for 'Password' with validation
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
     for (let index = 0; index < this.users.length; index++) {
       if(this.loginForm.value.name===this.users[index].userName && this.loginForm.value.passwd === this.users[index].password)
       {
-        this.sweetAlert.successAlert(this.users[index].userType.toUpperCase() + " Login Successful", "Welcome "+ this.users[index].userName);
+        this.Alert.successAlert(this.users[index].userType.toUpperCase() + " Login Successful", "Welcome "+ this.users[index].userName);
 
         this.loggedIn = true;
         localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn));
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
     }
 
     if(!this.loggedIn)
-    this.sweetAlert.errorAlert("Login Failed", "Invalid Credentials");
+    this.Alert.errorAlert("Login Failed", "Invalid Credentials");
   }
 
   hide = true;

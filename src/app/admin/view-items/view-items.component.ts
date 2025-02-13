@@ -20,7 +20,7 @@ export class ViewItemsComponent implements OnInit {
   editIndex: number = -1; 
   loggedIn: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService, private sweetAlert: SweetAlertService) {
+  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService, private Alert: SweetAlertService) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -75,7 +75,7 @@ export class ViewItemsComponent implements OnInit {
 
   removeItem(element: any): void {
 
-    this.sweetAlert.deleteWarningAlert('Are you sure?', 'Once deleted, you will not be able to recover this!', () => this.callback(element));
+    this.Alert.deleteWarningAlert('Are you sure?', 'Once deleted, you will not be able to recover this!', () => this.callback(element));
 
   }
 

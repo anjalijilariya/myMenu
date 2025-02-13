@@ -21,7 +21,7 @@ export class ViewCategoryComponent implements OnInit {
   categoryTypes: string[] = ['Food', 'Beverages', 'Dessert'];
   loggedIn: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private restrict: RestrictionService, private sweetAlert: SweetAlertService, private itemsService: ItemsService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private restrict: RestrictionService, private Alert: SweetAlertService, private itemsService: ItemsService) {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
@@ -76,7 +76,7 @@ export class ViewCategoryComponent implements OnInit {
     }
     else 
     {
-      this.sweetAlert.warningAlert("Incomplete details", "Please fill all the details!");
+      this.Alert.warningAlert("Incomplete details", "Please fill all the details!");
     }
   }
 
@@ -100,7 +100,7 @@ export class ViewCategoryComponent implements OnInit {
 
   removeItem(element: any): void {
 
-    this.sweetAlert.deleteWarningAlert('Are you sure?', 'Once deleted, you will not be able to recover this!', () => this.callback(element));
+    this.Alert.deleteWarningAlert('Are you sure?', 'Once deleted, you will not be able to recover this!', () => this.callback(element));
   }
 
   callback(element: any): void {

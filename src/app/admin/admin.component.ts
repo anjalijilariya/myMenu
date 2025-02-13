@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
   accessType: string;
   isDisabled: boolean;
 
-  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService, private sweetAlert: SweetAlertService) {
+  constructor(private fb: FormBuilder, private router: Router, private itemsService: ItemsService, private restrict: RestrictionService, private Alert: SweetAlertService) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -94,7 +94,10 @@ export class AdminComponent implements OnInit {
       } 
       else 
       {
-        this.itemsService.addData(this.userForm.value);
+        if(this.isValid(this.userForm.value.name, this.userForm.value.category))
+          this.itemsService.addData(this.userForm.value);
+        else
+          this.Alert.warningAlert("Duplicate Item", "This item already exists in the list!");
       }
 
       this.itemsService.sortListData(this.listData, this.categoryTypes);
@@ -106,7 +109,7 @@ export class AdminComponent implements OnInit {
     } 
     else 
     {
-      this.sweetAlert.warningAlert("Incomplete details", "Please fill all the details!");
+      this.Alert.warningAlert("Incomplete details", "Please fill all the details!");
     }
   }
 
@@ -127,5 +130,13 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['/admin/view-category']);
   }
 
+  isValid(name: string, category: string): boolean{
+    let valid = true;
+    this.listData.forEach(item => {
+      if(item.name.toLowerCase() == name.toLowerCase() && item.category == category)
+        valid = false;
+    });
+    return valid;
+  }
 }
 

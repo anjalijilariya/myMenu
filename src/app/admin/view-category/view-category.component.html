@@ -43,14 +43,14 @@
         <div class="row justify-content-center">
           <div class="col-md-8 mt-4 mb-4">
             <table class="table table-bordered mat-elevation-z8">
-              <thead>
+              <thead class="heading-bar">
                 <tr>
                   <th style="width: 50%"><span class="heading-text">Category</span> </th>
                   <th style="width: 50%"><span class="heading-text">Total Items</span> </th>
                   <th style="width: 50%"><span class="heading-text">Actions</span> </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="admin-view-table-body">
                 <tr *ngFor="let category of getCategoriesWithCounts()">
                     <td class="text-center">
                       <span>{{ category.category | titlecase }}</span>
@@ -58,7 +58,7 @@
                     <td class="text-center">
                       <span>{{ category.itemCount }}</span>
                     </td>
-                    <td style="width: 8%;">
+                    <td style="background-color: antiquewhite; width: 8%;">
                       <div class="rmv">
                         <mat-icon class="trash"  (click)="editItem(category)" style="
                 color: #1976d2;">edit</mat-icon>

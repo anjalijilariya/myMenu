@@ -9,17 +9,19 @@
 }
 
 .head{
-  width: 100%;
-  margin: 1rem;
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 200%;
-  font-weight: bold;
-  color: rgb(25 118 210);
-  margin-bottom: 60px;
+  // width: 100%;
+  // margin: 1rem;
+  // display: flex;
+  // justify-content: center;
+  // justify-items: center;
+  // align-items: center;
+  // font-family: 'Times New Roman', Times, serif;
+  // font-size: 200%;
+  // font-weight: bold;
+  // color: rgb(25 118 210);
+  // margin-bottom: 60px;
+
+  margin: 0 0 4rem;
 }
 .box{
   width: 100%;
@@ -36,7 +38,8 @@
     font-weight: bold;
     &:not(:disabled) {
       &:hover {
-        background-color: rgb(25 118 210 /70%);
+      // background-color: rgb(25 118 210 /70%);
+        background-color: #24c0c6;
         color: white;
         font-weight: bold;
         cursor: pointer;
